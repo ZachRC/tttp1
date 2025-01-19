@@ -733,6 +733,7 @@
                         <div class="relative aspect-video rounded-3xl overflow-hidden">
                             <video 
                                 class="w-full h-full object-cover"
+                                controls
                                 preload="metadata"
                                 poster="{{ video.video.url|add:'.jpg' }}"
                                 muted
@@ -757,26 +758,6 @@
                             const video = document.querySelector('video');
                             const playOverlay = document.querySelector('.play-overlay');
 
-                            // Create Intersection Observer
-                            const observer = new IntersectionObserver((entries) => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        video.play();
-                                        playOverlay.style.opacity = '0';
-                                    } else {
-                                        video.pause();
-                                        playOverlay.style.opacity = '1';
-                                    }
-                                });
-                            }, {
-                                threshold: 0.5 // Trigger when 50% of the video is visible
-                            });
-
-                            // Start observing the video
-                            if (video) {
-                                observer.observe(video);
-                            }
-
                             if (video && playOverlay) {
                                 playOverlay.addEventListener('click', function() {
                                     if (video.paused) {
@@ -795,12 +776,25 @@
                                 video.addEventListener('pause', function() {
                                     playOverlay.style.opacity = '1';
                                 });
+
+                                // Handle video end
+                                video.addEventListener('ended', function() {
+                                    playOverlay.style.opacity = '1';
+                                });
+
+                                // Handle video errors
+                                video.addEventListener('error', function() {
+                                    console.error('Error playing video');
+                                    playOverlay.style.opacity = '1';
+                                });
                             }
                         });
                     </script>
                 {% else %}
-                    <div class="text-center text-gray-500">
-                        <p>Video coming soon!</p>
+                    <div class="text-center text-gray-500 bg-white/50 backdrop-blur-sm p-12 rounded-3xl border border-gray-200">
+                        <i class="fas fa-video text-4xl mb-4 text-primary/50"></i>
+                        <p class="text-xl">Video coming soon!</p>
+                        <p class="text-sm mt-2">Our team is working on creating an amazing demonstration video.</p>
                     </div>
                 {% endif %}
             </div>

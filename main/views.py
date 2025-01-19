@@ -6,13 +6,14 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from .models import CustomUser
+from .models import CustomUser, Video
 from django.db.models import Q
 from .stripe_utils import create_subscription_session, handle_subscription_success, cancel_subscription, delete_stripe_customer
 import json
 
 def index(request):
-    return render(request, 'main/index.html')
+    video = Video.objects.filter(is_active=True).first()
+    return render(request, 'main/index.html', {'video': video})
 
 def login_view(request):
     if request.method == 'POST':

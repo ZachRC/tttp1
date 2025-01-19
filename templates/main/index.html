@@ -736,23 +736,16 @@
                         <!-- Video Player -->
                         <div class="relative aspect-video rounded-3xl overflow-hidden">
                             <video 
-                                class="w-full h-full object-cover"
-                                controls
+                                class="w-full h-full object-cover pointer-events-none"
                                 preload="metadata"
                                 poster="{{ video.video.url|add:'.jpg' }}"
                                 muted
                                 playsinline
+                                loop
                             >
                                 <source src="{{ video.video.url }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-
-                            <!-- Play Button Overlay -->
-                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity group cursor-pointer play-overlay">
-                                <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform">
-                                    <i class="fas fa-play text-primary text-3xl pl-1"></i>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -760,36 +753,28 @@
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
                             const video = document.querySelector('video');
-                            const playOverlay = document.querySelector('.play-overlay');
-
-                            if (video && playOverlay) {
-                                playOverlay.addEventListener('click', function() {
-                                    if (video.paused) {
+                            
+                            // Create an Intersection Observer
+                            const videoObserver = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    // Play video when it enters the viewport
+                                    if (entry.isIntersecting) {
                                         video.play();
-                                        playOverlay.style.opacity = '0';
                                     } else {
                                         video.pause();
-                                        playOverlay.style.opacity = '1';
                                     }
                                 });
+                            }, {
+                                threshold: 0.5 // Trigger when 50% of the video is visible
+                            });
 
-                                video.addEventListener('play', function() {
-                                    playOverlay.style.opacity = '0';
-                                });
-
-                                video.addEventListener('pause', function() {
-                                    playOverlay.style.opacity = '1';
-                                });
-
-                                // Handle video end
-                                video.addEventListener('ended', function() {
-                                    playOverlay.style.opacity = '1';
-                                });
+                            // Start observing the video
+                            if (video) {
+                                videoObserver.observe(video);
 
                                 // Handle video errors
                                 video.addEventListener('error', function() {
                                     console.error('Error playing video');
-                                    playOverlay.style.opacity = '1';
                                 });
                             }
                         });

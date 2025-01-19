@@ -69,50 +69,6 @@ except Exception as e:
 # Function to handle database migrations
 handle_migrations() {
     log "Handling database migrations..."
-    
-    # First, clear the migration history and tables
-    log "Clearing migration state..."
-    docker-compose exec -T web python -c "
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-import django
-django.setup()
-from django.db import connection
-
-with connection.cursor() as cursor:
-    # Drop tables in correct order with CASCADE
-    cursor.execute('''
-        DROP TABLE IF EXISTS django_admin_log CASCADE;
-        DROP TABLE IF EXISTS auth_permission CASCADE;
-        DROP TABLE IF EXISTS django_content_type CASCADE;
-        DROP TABLE IF EXISTS django_migrations CASCADE;
-        DROP TABLE IF EXISTS auth_group_permissions CASCADE;
-        DROP TABLE IF EXISTS auth_user_groups CASCADE;
-        DROP TABLE IF EXISTS auth_user_user_permissions CASCADE;
-        DROP TABLE IF EXISTS auth_group CASCADE;
-        
-        -- Add these lines for M2M tables auto-created by CustomUser
-        DROP TABLE IF EXISTS main_customuser_groups CASCADE;
-        DROP TABLE IF EXISTS main_customuser_user_permissions CASCADE;
-
-        DROP TABLE IF EXISTS main_customuser CASCADE;
-        DROP TABLE IF EXISTS main_video CASCADE;
-    ''')
-    
-    # Recreate migrations table
-    cursor.execute('''
-        CREATE TABLE django_migrations (
-            id SERIAL PRIMARY KEY,
-            app VARCHAR(255) NOT NULL,
-            name VARCHAR(255) NOT NULL,
-            applied TIMESTAMP WITH TIME ZONE NOT NULL
-        );
-    ''')
-"
-
-    # Remove all existing migrations except __init__.py
-    log "Cleaning up migration files..."
-    docker-compose exec -T web bash -c "cd /app/main/migrations && find . -type f ! -name '__init__.py' -delete"
 
     # Create fresh migrations
     log "Creating fresh migrations..."

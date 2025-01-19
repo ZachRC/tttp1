@@ -70,37 +70,43 @@ except Exception as e:
 handle_migrations() {
     log "Handling database migrations..."
     
-    # Backup existing migrations
-    log "Backing up existing migrations..."
-    docker-compose exec -T web bash -c "mkdir -p /app/migration_backup && cp -r /app/main/migrations/* /app/migration_backup/"
-    
-    # Remove all migrations except __init__.py
-    log "Cleaning up migrations..."
+    # First, try to fake all existing migrations to establish a baseline
+    log "Establishing migration baseline..."
+    docker-compose exec -T web python manage.py migrate --fake contenttypes zero || true
+    docker-compose exec -T web python manage.py migrate --fake auth zero || true
+    docker-compose exec -T web python manage.py migrate --fake admin zero || true
+    docker-compose exec -T web python manage.py migrate --fake sessions zero || true
+    docker-compose exec -T web python manage.py migrate --fake main zero || true
+
+    # Clear migration history from the database
+    log "Clearing migration history..."
+    docker-compose exec -T web python -c "
+from django.db import connection
+cursor = connection.cursor()
+cursor.execute('DELETE FROM django_migrations;')
+"
+
+    # Remove all existing migrations except __init__.py
+    log "Cleaning up migration files..."
     docker-compose exec -T web bash -c "cd /app/main/migrations && find . -type f ! -name '__init__.py' -delete"
-    
-    # Create fresh initial migration
-    log "Creating fresh initial migration..."
+
+    # Create fresh migrations
+    log "Creating fresh migrations..."
     docker-compose exec -T web python manage.py makemigrations main
-    
-    # Try to apply migrations with --fake-initial
-    log "Attempting to apply migrations with --fake-initial..."
-    if ! docker-compose exec -T web python manage.py migrate --fake-initial; then
-        log "Initial migration failed, trying alternative approach..."
-        
-        # Restore backup migrations
-        docker-compose exec -T web bash -c "cp -r /app/migration_backup/* /app/main/migrations/"
-        
-        # Try to fake all migrations first
-        log "Faking all migrations..."
-        docker-compose exec -T web python manage.py migrate --fake
-        
-        # Then apply any new migrations normally
-        log "Applying any remaining migrations..."
-        docker-compose exec -T web python manage.py migrate
-    fi
-    
-    # Clean up backup
-    docker-compose exec -T web bash -c "rm -rf /app/migration_backup"
+
+    # Apply migrations with fake-initial
+    log "Applying migrations..."
+    docker-compose exec -T web python manage.py migrate --fake-initial main
+    docker-compose exec -T web python manage.py migrate --fake auth
+    docker-compose exec -T web python manage.py migrate --fake admin
+    docker-compose exec -T web python manage.py migrate --fake contenttypes
+    docker-compose exec -T web python manage.py migrate --fake sessions
+
+    # Finally, apply any real migrations that might be needed
+    log "Applying any remaining migrations..."
+    docker-compose exec -T web python manage.py migrate --no-input
+
+    log "Migration handling completed"
 }
 
 # Update system packages

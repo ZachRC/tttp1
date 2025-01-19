@@ -51,6 +51,10 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    class Meta:
+        managed = True
+        db_table = 'main_customuser'
+
     def __str__(self):
         return self.email
 

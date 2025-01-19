@@ -1,1391 +1,201 @@
-<!DOCTYPE html>
-<html lang="en" class="overflow-x-hidden">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoTok - Automated TikTok Engagement Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#FF0050',
-                        secondary: '#00f2ea',
-                        light: '#f8fafc',
-                        accent: '#818cf8'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #FF0050, #00f2ea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, rgba(255,0,80,0.1), rgba(0,242,234,0.1));
-        }
-        .card-shadow {
-            box-shadow: 0 0 60px rgba(0,0,0,0.1);
-        }
-        .hover-up {
-            transition: transform 0.3s ease;
-        }
-        .hover-up:hover {
-            transform: translateY(-5px);
-        }
-        .dashboard-3d {
-            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
-            transform-style: preserve-3d;
-        }
-        .floating-notification {
-            animation: float 3s ease-in-out infinite;
-        }
-        .floating-stats {
-            transform: translateZ(20px);
-        }
-        .floating-activity {
-            transform: translateZ(40px);
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateZ(50px); }
-            50% { transform: translateY(-10px) translateZ(50px); }
-        }
-        .glass-effect {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .depth-shadow {
-            box-shadow: 
-                0 0 60px rgba(0,0,0,0.1),
-                0 10px 60px -10px rgba(0,0,0,0.1);
-        }
+{% extends 'main/base.html' %}
 
-        /* Hero Section Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+{% block title %}Dashboard - Premium App{% endblock %}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+{% block content %}
+<div class="space-y-6">
+    <!-- Welcome Section -->
+    <div class="glass-card rounded-2xl p-8">
+        <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-violet-400 text-transparent bg-clip-text">
+            Welcome, {{ user.username }}
+        </h1>
+        <p class="text-gray-400">
+            Manage your account and subscription
+        </p>
+    </div>
 
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes dashboardFloat {
-            from {
-                opacity: 0;
-                transform: perspective(1000px) rotateY(-5deg) rotateX(5deg) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: perspective(1000px) rotateY(-5deg) rotateX(5deg) translateY(0);
-            }
-        }
-
-        .animate-hero {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .animate-hero-delay-1 {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
-        }
-
-        .animate-hero-delay-2 {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.4s forwards;
-        }
-
-        .animate-hero-delay-3 {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.6s forwards;
-        }
-
-        .animate-dashboard {
-            opacity: 0;
-            animation: dashboardFloat 1.2s ease-out 0.4s forwards;
-        }
-
-        .animate-blur {
-            opacity: 0;
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-
-        /* Features Section Animations */
-        @keyframes slideUpFeature {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes scaleUpFeature {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes gradientLine {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        .feature-hidden {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .feature-visible {
-            animation: slideUpFeature 0.8s ease-out forwards;
-        }
-
-        .feature-icon-hidden {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-
-        .feature-icon-visible {
-            animation: scaleUpFeature 0.6s ease-out forwards;
-        }
-
-        .gradient-line-hidden {
-            width: 0;
-        }
-
-        .gradient-line-visible {
-            animation: gradientLine 0.8s ease-out forwards;
-        }
-
-        /* Pricing Section Premium Animations */
-        @keyframes floatPricingCard {
-            0% { transform: translateY(0) translateZ(0); }
-            50% { transform: translateY(-15px) translateZ(50px); }
-            100% { transform: translateY(0) translateZ(0); }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(255, 0, 80, 0.4); }
-            70% { box-shadow: 0 0 0 20px rgba(255, 0, 80, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 0, 80, 0); }
-        }
-
-        @keyframes scaleFeature {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .pricing-card-hidden {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .pricing-card-visible {
-            opacity: 1;
-            transform: translateY(0);
-            animation: floatPricingCard 6s ease-in-out infinite;
-        }
-
-        .pricing-popular {
-            position: relative;
-        }
-
-        .pricing-popular::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, #FF0050, #00f2ea, #FF0050);
-            background-size: 200% 200%;
-            border-radius: 24px;
-            animation: gradientShift 8s linear infinite;
-            z-index: -1;
-        }
-
-        .pricing-feature-hidden {
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-        }
-
-        .pricing-feature-visible {
-            animation: scaleFeature 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .pricing-cta-hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .pricing-cta-visible {
-            opacity: 1;
-            transform: translateY(0);
-            animation: pulseGlow 2s infinite;
-        }
-
-        /* Premium CTA Section Animations */
-        @keyframes floatCTA {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(2deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-        }
-
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 0, 80, 0.7); }
-            70% { box-shadow: 0 0 30px 10px rgba(255, 0, 80, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 0, 80, 0); }
-        }
-
-        @keyframes particleFloat {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-            50% { transform: translateY(-100px) translateX(100px) rotate(180deg); opacity: 1; }
-            100% { transform: translateY(-200px) translateX(0) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .cta-hidden {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .cta-visible {
-            opacity: 1;
-            transform: translateY(0);
-            animation: floatCTA 6s ease-in-out infinite;
-        }
-
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(45deg, var(--tw-gradient-from), var(--tw-gradient-to));
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .glow-effect {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glow-effect::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, #FF0050, #00f2ea, #FF0050);
-            background-size: 200% 200%;
-            animation: gradientMove 3s linear infinite;
-            z-index: -1;
-            border-radius: 9999px;
-        }
-    </style>
-</head>
-<body class="bg-light text-gray-800 overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="sticky top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 overflow-x-hidden">
-        <div class="max-w-7xl w-full mx-auto px-4">
-            <div class="flex items-center justify-between h-16 sm:h-20">
-                <div class="flex items-center">
-                    <span class="text-2xl sm:text-3xl font-bold gradient-text">AutoTok</span>
+    <!-- Profile Management -->
+    <div class="glass-card rounded-2xl p-8">
+        <h2 class="text-2xl font-bold mb-4">Profile Settings</h2>
+        <form method="post" action="{% url 'main:update-profile' %}" class="space-y-6">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Username -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Username</label>
+                    <input type="text" name="username" value="{{ user.username }}"
+                           class="w-full px-4 py-2 rounded-lg bg-[#2a2a3a] border border-gray-700 focus:border-blue-500 focus:outline-none">
                 </div>
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" name="email" value="{{ user.email }}"
+                           class="w-full px-4 py-2 rounded-lg bg-[#2a2a3a] border border-gray-700 focus:border-blue-500 focus:outline-none">
+                </div>
+            </div>
+            <button type="submit" name="update_profile"
+                    class="px-6 py-2 bg-gradient-to-r from-blue-500 to-violet-500 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Update Profile
+            </button>
+        </form>
+
+        <!-- Password Change -->
+        <div class="mt-8 pt-8 border-t border-gray-700">
+            <h3 class="text-xl font-semibold mb-4">Change Password</h3>
+            <form method="post" action="{% url 'main:update-profile' %}" class="space-y-4">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Current Password</label>
+                        <input type="password" name="current_password"
+                               class="w-full px-4 py-2 rounded-lg bg-[#2a2a3a] border border-gray-700 focus:border-blue-500 focus:outline-none"
+                               placeholder="••••••••">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">New Password</label>
+                        <input type="password" name="new_password"
+                               class="w-full px-4 py-2 rounded-lg bg-[#2a2a3a] border border-gray-700 focus:border-blue-500 focus:outline-none"
+                               placeholder="••••••••">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Confirm New Password</label>
+                        <input type="password" name="confirm_password"
+                               class="w-full px-4 py-2 rounded-lg bg-[#2a2a3a] border border-gray-700 focus:border-blue-500 focus:outline-none"
+                               placeholder="••••••••">
+                    </div>
+                </div>
+                <button type="submit" name="change_password"
+                        class="px-6 py-2 bg-gradient-to-r from-blue-500 to-violet-500 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                    Change Password
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Subscription Status -->
+    <div class="glass-card rounded-2xl p-8">
+        <h2 class="text-2xl font-bold mb-4">Subscription Status</h2>
+        {% if user.is_subscription_active %}
+            <div class="bg-green-500/20 text-green-400 rounded-lg p-4 mb-4">
+                <p class="font-semibold">Active Premium Subscription</p>
+                <p class="text-sm">Valid until: {{ user.subscription_end|date:"F j, Y" }}</p>
+            </div>
+            {% if user.subscription_status == 'cancelled' %}
+                <div class="bg-yellow-500/20 text-yellow-400 rounded-lg p-4 mb-4">
+                    <p class="font-semibold">Subscription Cancelled</p>
+                    <p class="text-sm">Your subscription will remain active until {{ user.subscription_end|date:"F j, Y" }}</p>
+                </div>
+            {% else %}
+                <form method="post" action="{% url 'main:subscription-cancel' %}" class="mt-4">
+                    {% csrf_token %}
+                    <button type="submit" 
+                            class="bg-red-500/20 text-red-400 px-6 py-2 rounded-lg hover:bg-red-500/30 transition-colors">
+                        Cancel Subscription
                     </button>
-                </div>
-                <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-0 md:ml-10 flex items-baseline space-x-6">
-                        <a href="#features" class="hover:text-primary px-3 py-2 text-sm font-medium">Features</a>
-                        <a href="#how-it-works" class="hover:text-primary px-3 py-2 text-sm font-medium">How It Works</a>
-                        <a href="#pricing" class="hover:text-primary px-3 py-2 text-sm font-medium">Pricing</a>
-                        <a href="#" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full text-sm font-medium transition-all">Get Started</a>
-                    </div>
-                </div>
+                </form>
+            {% endif %}
+        {% else %}
+            <div class="bg-yellow-500/20 text-yellow-400 rounded-lg p-4 mb-4">
+                <p class="font-semibold">No Active Subscription</p>
+                <p class="text-sm">Subscribe to access premium features</p>
             </div>
-            <!-- Mobile Menu Panel -->
-            <div id="mobile-menu" class="hidden md:hidden w-full overflow-x-hidden">
-                <div class="px-4 pt-2 pb-3 space-y-1 bg-white/95 rounded-b-xl border-t border-gray-100">
-                    <a href="#features" class="hover:text-primary block px-3 py-2 text-base font-medium">Features</a>
-                    <a href="#how-it-works" class="hover:text-primary block px-3 py-2 text-base font-medium">How It Works</a>
-                    <a href="#pricing" class="hover:text-primary block px-3 py-2 text-base font-medium">Pricing</a>
-                    <a href="#" class="bg-primary hover:bg-primary/90 text-white block px-6 py-3 rounded-full text-base font-medium transition-all text-center mt-4">Get Started</a>
-                </div>
+            <button id="subscribe-button" 
+                    class="bg-gradient-to-r from-blue-500 to-violet-500 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                Subscribe - $5/month
+            </button>
+        {% endif %}
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-medium text-gray-300">Account Status</h3>
+                <span class="h-8 w-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <span class="h-3 w-3 rounded-full bg-green-500"></span>
+                </span>
             </div>
+            <p class="mt-2 text-2xl font-semibold">Active</p>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-24 px-4 gradient-bg overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <!-- Text Content -->
-                <div class="text-center lg:text-left order-2 lg:order-1">
-                    <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 sm:mb-6 animate-hero">
-                        Automate with Confidence
-                    </span>
-                    <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight animate-hero-delay-1">
-                        Supercharge Your <span class="gradient-text">TikTok</span> Engagement
-                    </h1>
-                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 lg:mb-12 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-hero-delay-2">
-                        Let our intelligent bot handle your TikTok comments while you focus on creating amazing content. Set it up once, grow forever.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-hero-delay-3">
-                        <a href="#" class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full text-base sm:text-lg font-semibold transition-all hover-up text-center">
-                            Start Free Trial
-                        </a>
-                        <a href="#" class="w-full sm:w-auto bg-white border-2 border-gray-200 hover:border-primary/30 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full text-base sm:text-lg font-semibold transition-all hover-up flex items-center justify-center gap-2">
-                            <i class="fas fa-play-circle text-primary"></i>
-                            Watch Demo
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Dashboard Preview -->
-                <div class="relative order-1 lg:order-2 perspective-container mx-auto lg:mx-0 max-w-[95%] sm:max-w-[85%] lg:max-w-none w-full animate-dashboard">
-                    <div class="relative dashboard-3d glass-effect rounded-3xl depth-shadow p-4 sm:p-6 transition-all duration-500 border border-gray-100/50">
-                        <!-- Dashboard Header with Gradient Border -->
-                        <div class="relative mb-4 sm:mb-8 floating-stats">
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-lg"></div>
-                            <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-3 sm:gap-4">
-                                        <div class="relative hidden sm:block">
-                                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-xl blur"></div>
-                                            <div class="relative w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-white flex items-center justify-center border border-gray-100">
-                                                <i class="fas fa-robot text-xl sm:text-2xl gradient-text"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-base sm:text-xl font-bold">AutoTok Dashboard</h3>
-                                            <div class="flex items-center gap-2">
-                                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                                <p class="text-xs sm:text-sm text-gray-600">3 Active Campaigns</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-green-100/80 text-green-600 rounded-full text-xs sm:text-sm font-medium backdrop-blur-sm whitespace-nowrap">
-                                            <i class="fas fa-check-circle mr-1"></i> All Systems Active
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Stats Grid -->
-                        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-8 floating-stats">
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-10">
-                                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-lg transition-all group-hover:blur-xl"></div>
-                                <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50 transition-all hover:border-primary/20">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <p class="text-xs sm:text-sm text-gray-600">Comments Today</p>
-                                        <i class="fas fa-comments text-primary/20 text-sm sm:text-base"></i>
-                                    </div>
-                                    <p class="text-xl sm:text-3xl font-bold mb-1">247</p>
-                                    <div class="flex items-center gap-1 text-green-500 text-xs sm:text-sm">
-                                        <i class="fas fa-arrow-up text-xs"></i>
-                                        <span>12% vs yesterday</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-10">
-                                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-lg transition-all group-hover:blur-xl"></div>
-                                <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50 transition-all hover:border-primary/20">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <p class="text-xs sm:text-sm text-gray-600">Active Accounts</p>
-                                        <i class="fas fa-users text-primary/20 text-sm sm:text-base"></i>
-                                    </div>
-                                    <p class="text-xl sm:text-3xl font-bold mb-1">5</p>
-                                    <div class="flex items-center gap-1 text-gray-500 text-xs sm:text-sm">
-                                        <span>of 5 total</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-10">
-                                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-lg transition-all group-hover:blur-xl"></div>
-                                <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50 transition-all hover:border-primary/20">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <p class="text-xs sm:text-sm text-gray-600">Engagement Rate</p>
-                                        <i class="fas fa-chart-line text-primary/20 text-sm sm:text-base"></i>
-                                    </div>
-                                    <p class="text-xl sm:text-3xl font-bold mb-1">8.2%</p>
-                                    <div class="flex items-center gap-1 text-green-500 text-xs sm:text-sm">
-                                        <i class="fas fa-arrow-up text-xs"></i>
-                                        <span>2.1% this week</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Activity Feed with Hover Effects -->
-                        <div class="space-y-2 sm:space-y-3 floating-activity">
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-20">
-                                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-blue-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
-                                <div class="relative flex items-center gap-3 sm:gap-4 glass-effect p-3 sm:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-blue-200">
-                                    <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-blue-100/80 flex items-center justify-center backdrop-blur-sm">
-                                        <i class="fas fa-comment text-blue-500 text-sm sm:text-base"></i>
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-xs sm:text-sm font-medium truncate">New comment posted</p>
-                                        <p class="text-xs text-gray-500 truncate">On trending #dance video</p>
-                                    </div>
-                                    <span class="text-xs text-gray-400 whitespace-nowrap">2m ago</span>
-                                </div>
-                            </div>
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-20">
-                                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-purple-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
-                                <div class="relative flex items-center gap-3 sm:gap-4 glass-effect p-3 sm:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-purple-200">
-                                    <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-purple-100/80 flex items-center justify-center backdrop-blur-sm">
-                                        <i class="fas fa-hashtag text-purple-500 text-sm sm:text-base"></i>
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-xs sm:text-sm font-medium truncate">New hashtag added</p>
-                                        <p class="text-xs text-gray-500 truncate">#viral added to targeting</p>
-                                    </div>
-                                    <span class="text-xs text-gray-400 whitespace-nowrap">5m ago</span>
-                                </div>
-                            </div>
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-20">
-                                <div class="absolute inset-0 bg-gradient-to-r from-green-500/5 to-green-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
-                                <div class="relative flex items-center gap-3 sm:gap-4 glass-effect p-3 sm:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-green-200">
-                                    <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-green-100/80 flex items-center justify-center backdrop-blur-sm">
-                                        <i class="fas fa-chart-line text-green-500 text-sm sm:text-base"></i>
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-xs sm:text-sm font-medium truncate">Engagement milestone</p>
-                                        <p class="text-xs text-gray-500 truncate">Reached 1000 comments today</p>
-                                    </div>
-                                    <span class="text-xs text-gray-400 whitespace-nowrap">12m ago</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3D Floating Elements - Responsive sizing -->
-                    <div class="absolute -top-8 sm:-left-8 left-0 w-16 sm:w-20 h-16 sm:h-20 bg-primary/10 rounded-full blur-xl animate-pulse transform rotate-45"></div>
-                    <div class="absolute -bottom-8 sm:-right-8 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-secondary/10 rounded-full blur-xl animate-pulse delay-700 transform -rotate-45"></div>
-                </div>
+        <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-medium text-gray-300">Member Since</h3>
+                <span class="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <span class="h-3 w-3 rounded-full bg-blue-500"></span>
+                </span>
             </div>
+            <p class="mt-2 text-2xl font-semibold">{{ user.date_joined|date:"M d, Y" }}</p>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-16 sm:py-20 lg:py-24 px-4 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] feature-hidden"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] feature-hidden"></div>
-
-        <div class="max-w-7xl mx-auto relative">
-            <!-- Header -->
-            <div class="text-center mb-12 sm:mb-16 lg:mb-20 relative feature-hidden">
-                <div class="inline-block">
-                    <span class="text-primary font-semibold mb-3 sm:mb-4 block tracking-wider">POWERFUL FEATURES</span>
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 relative">
-                        Everything You Need
-                        <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full gradient-line-hidden"></div>
-                    </h2>
-                </div>
-                <p class="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mt-6 sm:mt-8">Streamline your TikTok engagement with our comprehensive suite of automation tools.</p>
+        <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-medium text-gray-300">Subscription</h3>
+                <span class="h-8 w-8 rounded-full {% if user.is_subscription_active %}bg-green-500/20{% else %}bg-yellow-500/20{% endif %} flex items-center justify-center">
+                    <span class="h-3 w-3 rounded-full {% if user.is_subscription_active %}bg-green-500{% else %}bg-yellow-500{% endif %}"></span>
+                </span>
             </div>
-
-            <!-- Features Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative">
-                <!-- Smart Auto-Comments Feature -->
-                <div class="group relative feature-hidden" style="transition-delay: 0.1s">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg transition-all duration-500 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <!-- Icon Container -->
-                        <div class="mb-8 relative feature-icon-hidden">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-6">
-                                <i class="fas fa-robot text-2xl gradient-text"></i>
-                            </div>
-                            <div class="absolute top-0 left-0 w-full h-full bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-all"></div>
-                        </div>
-
-                        <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Smart Auto-Comments</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">Our AI-powered system analyzes content and timing to leave engaging comments that feel natural and drive interaction.</p>
-                        
-                        <!-- Feature List -->
-                        <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                AI-Powered Analysis
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Natural Language
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Smart Timing
-                            </li>
-                        </ul>
-
-                        <!-- Hover Line -->
-                        <div class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500"></div>
-                    </div>
-                </div>
-
-                <!-- Multi-Account Support Feature -->
-                <div class="group relative lg:translate-y-8 feature-hidden" style="transition-delay: 0.2s">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg transition-all duration-500 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <!-- Icon Container -->
-                        <div class="mb-8 relative feature-icon-hidden">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-6">
-                                <i class="fas fa-cookie text-2xl gradient-text"></i>
-                            </div>
-                            <div class="absolute top-0 left-0 w-full h-full bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-all"></div>
-                        </div>
-
-                        <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Multi-Account Support</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">Securely manage multiple TikTok accounts with our advanced cookie-based authentication system.</p>
-                        
-                        <!-- Feature List -->
-                        <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Secure Authentication
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Multiple Accounts
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Easy Management
-                            </li>
-                        </ul>
-
-                        <!-- Hover Line -->
-                        <div class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500"></div>
-                    </div>
-                </div>
-
-                <!-- Analytics Dashboard Feature -->
-                <div class="group relative feature-hidden" style="transition-delay: 0.3s">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg transition-all duration-500 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <!-- Icon Container -->
-                        <div class="mb-8 relative feature-icon-hidden">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-6">
-                                <i class="fas fa-chart-line text-2xl gradient-text"></i>
-                            </div>
-                            <div class="absolute top-0 left-0 w-full h-full bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-all"></div>
-                        </div>
-
-                        <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Analytics Dashboard</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">Track performance metrics, engagement rates, and optimize your automation strategy in real-time.</p>
-                        
-                        <!-- Feature List -->
-                        <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Real-time Tracking
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Performance Metrics
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Strategy Insights
-                            </li>
-                        </ul>
-
-                        <!-- Hover Line -->
-                        <div class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500"></div>
-                    </div>
-                </div>
-            </div>
+            <p class="mt-2 text-2xl font-semibold">{% if user.is_subscription_active %}Premium{% else %}Free{% endif %}</p>
         </div>
-    </section>
+    </div>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="py-24 px-4 gradient-bg relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]"></div>
-
-        <div class="max-w-7xl mx-auto relative">
-            <!-- Header with Animated Line -->
-            <div class="text-center mb-20 relative">
-                <div class="inline-block">
-                    <span class="text-primary font-semibold mb-4 block tracking-wider">SIMPLE PROCESS</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 relative">
-                        How AutoTok Works
-                        <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-                    </h2>
-                </div>
-                {% if video %}
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">{{ video.description }}</p>
+    <!-- Account Management -->
+    <div class="glass-card rounded-2xl p-8">
+        <h2 class="text-2xl font-bold mb-4">Account Management</h2>
+        <div class="bg-red-500/10 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-red-400 mb-2">Delete Account</h3>
+            <p class="text-gray-400 mb-4">
+                Warning: This action cannot be undone. All your data will be permanently deleted.
+                {% if user.is_subscription_active %}
+                Your subscription will also be cancelled.
                 {% endif %}
-            </div>
-
-            <!-- Video Player Container -->
-            <div class="relative max-w-4xl mx-auto">
-                {% if video %}
-                    <!-- Video Wrapper with Aspect Ratio -->
-                    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white">
-                        <!-- Gradient Border -->
-                        <div class="absolute inset-0 p-[2px] rounded-3xl bg-gradient-to-r from-primary to-secondary">
-                            <div class="absolute inset-0 rounded-3xl bg-white"></div>
-                        </div>
-                        
-                        <!-- Video Player -->
-                        <div class="relative aspect-video rounded-3xl overflow-hidden">
-                            <video 
-                                class="w-full h-full object-cover"
-                                preload="metadata"
-                                poster="{{ video.video.url|add:'.jpg' }}"
-                                muted
-                                playsinline
-                            >
-                                <source src="{{ video.video.url }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-
-                            <!-- Play Button Overlay -->
-                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 hover:opacity-100 transition-opacity group cursor-pointer play-overlay">
-                                <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform">
-                                    <i class="fas fa-play text-primary text-3xl pl-1"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Video Controls Script -->
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const video = document.querySelector('video');
-                            const playOverlay = document.querySelector('.play-overlay');
-
-                            // Create Intersection Observer
-                            const observer = new IntersectionObserver((entries) => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        video.play();
-                                        playOverlay.style.opacity = '0';
-                                    } else {
-                                        video.pause();
-                                        playOverlay.style.opacity = '1';
-                                    }
-                                });
-                            }, {
-                                threshold: 0.5 // Trigger when 50% of the video is visible
-                            });
-
-                            // Start observing the video
-                            if (video) {
-                                observer.observe(video);
-                            }
-
-                            if (video && playOverlay) {
-                                playOverlay.addEventListener('click', function() {
-                                    if (video.paused) {
-                                        video.play();
-                                        playOverlay.style.opacity = '0';
-                                    } else {
-                                        video.pause();
-                                        playOverlay.style.opacity = '1';
-                                    }
-                                });
-
-                                video.addEventListener('play', function() {
-                                    playOverlay.style.opacity = '0';
-                                });
-
-                                video.addEventListener('pause', function() {
-                                    playOverlay.style.opacity = '1';
-                                });
-                            }
-                        });
-                    </script>
-                {% else %}
-                    <div class="text-center text-gray-500">
-                        <p>Video coming soon!</p>
-                    </div>
-                {% endif %}
-            </div>
+            </p>
+            <form method="post" action="{% url 'main:delete-account' %}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                {% csrf_token %}
+                <button type="submit" 
+                        class="bg-red-500/20 text-red-400 px-6 py-2 rounded-lg hover:bg-red-500/30 transition-colors">
+                    Delete Account
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
+</div>
+{% endblock %}
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-4 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pricing-card-hidden"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] pricing-card-hidden"></div>
+{% block extra_scripts %}
+<script>
+const stripe = Stripe('{{ stripe_key }}');
+const subscribeButton = document.getElementById('subscribe-button');
 
-        <div class="max-w-7xl mx-auto relative">
-            <!-- Header with Animated Line -->
-            <div class="text-center mb-20 relative pricing-card-hidden">
-                <div class="inline-block">
-                    <span class="text-primary font-semibold mb-4 block tracking-wider">PRICING PLANS</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 relative">
-                        Simple, Transparent Pricing
-                        <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full gradient-line-hidden"></div>
-                    </h2>
-                </div>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">Choose the perfect plan for your TikTok automation needs.</p>
-                
-                <!-- Billing Toggle -->
-                <div class="flex items-center justify-center gap-4 mt-8">
-                    <span class="text-gray-600 font-medium">Monthly</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="billing-toggle" class="sr-only peer">
-                        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
-                    </label>
-                    <span class="text-gray-600 font-medium">Annually <span class="text-primary text-sm font-bold">Save 20%</span></span>
-                </div>
-            </div>
-
-            <!-- Enhanced Pricing Grid -->
-            <div class="grid lg:grid-cols-3 gap-8 relative">
-                <!-- Starter Plan -->
-                <div class="group relative pricing-card-hidden">
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                            <span class="text-gray-600 font-semibold">Starter</span>
-                        </div>
-                        
-                        <!-- Price -->
-                        <div class="text-center mb-8">
-                            <div class="flex items-center justify-center gap-2">
-                                <span class="text-6xl font-bold">$29</span>
-                                <div class="text-left">
-                                    <span class="text-gray-400">/mo</span>
-                                    <p class="text-sm text-gray-400">billed monthly</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-500 mt-2">Perfect for creators just starting out</p>
-                        </div>
-
-                        <!-- Features List -->
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 pricing-feature-hidden" style="transition-delay: 0.1s">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">1 Account</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">100 Comments/Day</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Basic Analytics Dashboard</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Email Support</span>
-                            </li>
-                        </ul>
-
-                        <!-- CTA Button -->
-                        <a href="#" class="block text-center bg-gray-100 hover:bg-gray-200 px-6 py-4 rounded-full font-semibold transition-all pricing-cta-hidden">
-                            Start Free Trial
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Professional Plan -->
-                <div class="group relative lg:-translate-y-8 pricing-card-hidden pricing-popular" style="transition-delay: 0.2s">
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border-2 border-primary">
-                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary px-6 py-2 rounded-full">
-                            <span class="text-white font-semibold">Most Popular</span>
-                        </div>
-
-                        <!-- Price -->
-                        <div class="text-center mb-8">
-                            <div class="flex items-center justify-center gap-2">
-                                <span class="text-6xl font-bold">$79</span>
-                                <div class="text-left">
-                                    <span class="text-gray-400">/mo</span>
-                                    <p class="text-sm text-gray-400">billed monthly</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-500 mt-2">For growing creators and small teams</p>
-                        </div>
-
-                        <!-- Features List -->
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>5 Accounts</strong></span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>500 Comments/Day</strong></span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Advanced Analytics + Reports</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Priority Support</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Custom Comment Templates</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">API Access</span>
-                            </li>
-                        </ul>
-
-                        <!-- CTA Button -->
-                        <a href="#" class="block text-center bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded-full font-semibold transition-all pricing-cta-hidden relative overflow-hidden pricing-popular">
-                            <span class="relative z-10">Get Started Now</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 pricing-cta-visible"></div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Enterprise Plan -->
-                <div class="group relative pricing-card-hidden" style="transition-delay: 0.4s">
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                            <span class="text-gray-600 font-semibold">Enterprise</span>
-                        </div>
-
-                        <!-- Price -->
-                        <div class="text-center mb-8">
-                            <div class="flex items-center justify-center gap-2">
-                                <span class="text-6xl font-bold">$199</span>
-                                <div class="text-left">
-                                    <span class="text-gray-400">/mo</span>
-                                    <p class="text-sm text-gray-400">billed monthly</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-500 mt-2">For large teams and agencies</p>
-                        </div>
-
-                        <!-- Features List -->
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>Unlimited</strong> Accounts</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>Unlimited</strong> Comments</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Custom Analytics Dashboard</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">24/7 Priority Support</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Dedicated Account Manager</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Custom Integration Support</span>
-                            </li>
-                        </ul>
-
-                        <!-- CTA Button -->
-                        <a href="#" class="block text-center bg-gray-100 hover:bg-gray-200 px-6 py-4 rounded-full font-semibold transition-all pricing-cta-hidden">
-                            Contact Sales
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Features with enhanced animations -->
-            <div class="mt-20 text-center">
-                <h3 class="text-2xl font-bold mb-8 pricing-card-hidden">All Plans Include</h3>
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden" style="transition-delay: 0.1s">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-shield-alt text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Secure Access</h4>
-                        <p class="text-sm text-gray-600">Bank-level security for your accounts</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-sync text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Regular Updates</h4>
-                        <p class="text-sm text-gray-600">Always up to date with TikTok changes</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-graduation-cap text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Onboarding</h4>
-                        <p class="text-sm text-gray-600">Guided setup and training included</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-life-ring text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Support</h4>
-                        <p class="text-sm text-gray-600">Help when you need it</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Section -->
-            <div class="mt-20">
-                <h3 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h3>
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="p-6 rounded-2xl bg-white hover:shadow-lg transition-all duration-300">
-                        <h4 class="font-semibold mb-2">Can I change plans later?</h4>
-                        <p class="text-gray-600">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white hover:shadow-lg transition-all duration-300">
-                        <h4 class="font-semibold mb-2">Is there a free trial?</h4>
-                        <p class="text-gray-600">Yes! Try any plan free for 14 days. No credit card required.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enhanced CTA Section -->
-    <section class="py-24 px-4 relative overflow-hidden">
-        <!-- Dynamic Background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] cta-hidden"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] cta-hidden"></div>
-        
-        <!-- Floating Particles -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="particle" style="--particle-speed: 15s; animation: particleFloat var(--particle-speed) infinite;"></div>
-            <div class="particle" style="--particle-speed: 25s; animation: particleFloat var(--particle-speed) infinite; animation-delay: 5s;"></div>
-            <div class="particle" style="--particle-speed: 20s; animation: particleFloat var(--particle-speed) infinite; animation-delay: 2s;"></div>
-            <div class="particle" style="--particle-speed: 18s; animation: particleFloat var(--particle-speed) infinite; animation-delay: 8s;"></div>
-        </div>
-
-        <!-- Main Content Container -->
-        <div class="max-w-4xl mx-auto relative">
-            <!-- Decorative Elements -->
-            <div class="absolute -top-10 -left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl cta-hidden"></div>
-            <div class="absolute -bottom-10 -right-10 w-20 h-20 bg-secondary/20 rounded-full blur-xl cta-hidden"></div>
-            
-            <!-- Content Wrapper -->
-            <div class="relative bg-white/30 backdrop-blur-lg rounded-3xl p-12 border border-white/20 shadow-2xl cta-hidden">
-                <div class="text-center relative">
-                    <!-- Premium Header -->
-                    <div class="inline-block relative mb-8 cta-hidden">
-                        <span class="text-primary font-semibold tracking-wider">TAKE THE NEXT STEP</span>
-                        <h2 class="text-4xl md:text-5xl font-bold mt-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                            Ready to Automate Your TikTok Growth?
-                        </h2>
-                        <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full gradient-line-hidden"></div>
-                    </div>
-
-                    <!-- Enhanced Description -->
-                    <div class="relative mb-12 cta-hidden">
-                        <p class="text-xl text-gray-600">Join thousands of content creators who trust AutoTok for their engagement automation.</p>
-                        <!-- Stats Display -->
-                        <div class="grid grid-cols-3 gap-8 mt-8">
-                            <div class="text-center">
-                                <div class="text-3xl font-bold gradient-text">10K+</div>
-                                <div class="text-sm text-gray-600">Active Users</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold gradient-text">1M+</div>
-                                <div class="text-sm text-gray-600">Comments Made</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold gradient-text">98%</div>
-                                <div class="text-sm text-gray-600">Satisfaction Rate</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Premium CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center cta-hidden">
-                        <a href="#" class="group relative glow-effect">
-                            <div class="relative bg-primary hover:bg-primary/90 text-white px-10 py-5 rounded-full text-lg font-semibold transition-all transform hover:scale-105">
-                                Start Free Trial
-                                <div class="absolute inset-0 rounded-full bg-white/20 blur-sm group-hover:blur-md transition-all"></div>
-                            </div>
-                        </a>
-                        <a href="#" class="relative overflow-hidden bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary/30 px-10 py-5 rounded-full text-lg font-semibold transition-all transform hover:scale-105 group">
-                            <span class="relative z-10 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent group-hover:opacity-80">Schedule Demo</span>
-                            <div class="absolute inset-0 rounded-full bg-white/20 blur-sm group-hover:blur-md transition-all"></div>
-                        </a>
-                    </div>
-
-                    <!-- Trust Indicators -->
-                    <div class="mt-12 pt-8 border-t border-gray-200/30 cta-hidden">
-                        <div class="flex flex-wrap justify-center items-center gap-8">
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-shield-alt text-primary"></i>
-                                <span class="text-sm text-gray-600">Bank-Level Security</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-clock text-primary"></i>
-                                <span class="text-sm text-gray-600">24/7 Support</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-undo text-primary"></i>
-                                <span class="text-sm text-gray-600">14-Day Money Back</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-16 px-4 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-12">
-                <div>
-                    <span class="text-3xl font-bold gradient-text">AutoTok</span>
-                    <p class="mt-6 text-gray-600 leading-relaxed">Automating TikTok engagement for creators worldwide. Grow your presence effortlessly.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Product</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="#" class="hover:text-primary transition-colors">Features</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Pricing</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Documentation</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Company</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="#" class="hover:text-primary transition-colors">About</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Careers</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Legal</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-16 pt-8 border-t border-gray-100 text-center text-gray-600">
-                <p>&copy; 2024 AutoTok. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+if (subscribeButton) {
+    subscribeButton.addEventListener('click', async function() {
+        try {
+            const response = await fetch('/subscription/create-checkout-session/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
             });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 0) {
-                nav.classList.add('shadow-sm');
-            } else {
-                nav.classList.remove('shadow-sm');
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                console.error('Error:', data.error);
+                return;
             }
-        });
-
-        // Pricing toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const billingToggle = document.getElementById('billing-toggle');
-            const monthlyPrices = ['$29', '$79', '$199'];
-            const annualPrices = ['$23', '$63', '$159'];
-            const priceElements = document.querySelectorAll('.text-6xl.font-bold');
             
-            billingToggle.addEventListener('change', function() {
-                const prices = this.checked ? annualPrices : monthlyPrices;
-                priceElements.forEach((el, index) => {
-                    el.textContent = prices[index];
-                });
+            const result = await stripe.redirectToCheckout({
+                sessionId: data.sessionId
             });
-        });
-
-        // Features Section Animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const featureObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Add visible class based on element type
-                        if (entry.target.classList.contains('feature-hidden')) {
-                            entry.target.classList.add('feature-visible');
-                        } else if (entry.target.classList.contains('feature-icon-hidden')) {
-                            entry.target.classList.add('feature-icon-visible');
-                        } else if (entry.target.classList.contains('gradient-line-hidden')) {
-                            entry.target.classList.add('gradient-line-visible');
-                        }
-                        // Stop observing after animation
-                        featureObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px'
-            });
-
-            // Observe all feature elements
-            document.querySelectorAll('.feature-hidden, .feature-icon-hidden, .gradient-line-hidden').forEach(el => {
-                featureObserver.observe(el);
-            });
-        });
-
-        // Pricing Section Enhanced Animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const pricingObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // Add visible class with staggered delay
-                        if (entry.target.classList.contains('pricing-card-hidden')) {
-                            setTimeout(() => {
-                                entry.target.classList.add('pricing-card-visible');
-                            }, index * 200); // Stagger each card
-                        } else if (entry.target.classList.contains('pricing-feature-hidden')) {
-                            setTimeout(() => {
-                                entry.target.classList.add('pricing-feature-visible');
-                            }, index * 100); // Stagger each feature
-                        } else if (entry.target.classList.contains('pricing-cta-hidden')) {
-                            entry.target.classList.add('pricing-cta-visible');
-                        }
-                        // Stop observing after animation
-                        pricingObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px'
-            });
-
-            // Observe all pricing elements
-            document.querySelectorAll('.pricing-card-hidden, .pricing-feature-hidden, .pricing-cta-hidden').forEach(el => {
-                pricingObserver.observe(el);
-            });
-        });
-
-        // Add CTA Section Animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctaObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('cta-visible');
-                        }, index * 150);
-                        ctaObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px'
-            });
-
-            document.querySelectorAll('.cta-hidden').forEach(el => {
-                ctaObserver.observe(el);
-            });
-
-            // Create floating particles dynamically
-            const particleContainer = document.querySelector('.overflow-hidden');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const speed = Math.random() * 10 + 15;
-                const delay = Math.random() * 10;
-                const size = Math.random() * 10 + 5;
-                particle.style.cssText = `
-                    --particle-speed: ${speed}s;
-                    animation: particleFloat var(--particle-speed) infinite;
-                    animation-delay: ${delay}s;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${Math.random() * 100}%;
-                    bottom: -20px;
-                `;
-                particleContainer.appendChild(particle);
+            
+            if (result.error) {
+                console.error('Error:', result.error);
             }
-        });
-
-        // Mobile Menu Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                // Change icon based on menu state
-                const icon = mobileMenuButton.querySelector('i');
-                if (mobileMenu.classList.contains('hidden')) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                } else {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                }
-            });
-
-            // Close mobile menu when clicking menu items
-            const mobileMenuItems = mobileMenu.querySelectorAll('a');
-            mobileMenuItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    const icon = mobileMenuButton.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                });
-            });
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-                    mobileMenu.classList.add('hidden');
-                    const icon = mobileMenuButton.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+</script>
+{% endblock %} 

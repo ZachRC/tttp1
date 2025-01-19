@@ -80,9 +80,19 @@ django.setup()
 from django.db import connection
 
 with connection.cursor() as cursor:
-    # Drop existing migration history
-    cursor.execute('DROP TABLE IF EXISTS django_migrations;')
-    cursor.execute('DROP TABLE IF EXISTS django_content_type;')
+    # Drop tables in correct order with CASCADE
+    cursor.execute('''
+        DROP TABLE IF EXISTS django_admin_log CASCADE;
+        DROP TABLE IF EXISTS auth_permission CASCADE;
+        DROP TABLE IF EXISTS django_content_type CASCADE;
+        DROP TABLE IF EXISTS django_migrations CASCADE;
+        DROP TABLE IF EXISTS auth_group_permissions CASCADE;
+        DROP TABLE IF EXISTS auth_user_groups CASCADE;
+        DROP TABLE IF EXISTS auth_user_user_permissions CASCADE;
+        DROP TABLE IF EXISTS auth_group CASCADE;
+        DROP TABLE IF EXISTS main_customuser CASCADE;
+        DROP TABLE IF EXISTS main_video CASCADE;
+    ''')
     
     # Recreate migrations table
     cursor.execute('''
@@ -113,22 +123,17 @@ with connection.cursor() as cursor:
     log "Creating fresh migrations..."
     docker-compose exec -T web python manage.py makemigrations main
 
-    # Apply contenttypes migrations first
-    log "Applying contenttypes migrations..."
+    # Apply migrations in correct order
+    log "Applying migrations in order..."
     docker-compose exec -T web python manage.py migrate contenttypes --fake-initial
-
-    # Apply auth migrations next
-    log "Applying auth migrations..."
     docker-compose exec -T web python manage.py migrate auth --fake-initial
-
-    # Apply main app migrations
-    log "Applying main app migrations..."
     docker-compose exec -T web python manage.py migrate main --fake-initial
+    docker-compose exec -T web python manage.py migrate admin --fake-initial
+    docker-compose exec -T web python manage.py migrate sessions --fake-initial
 
-    # Apply remaining migrations
-    log "Applying remaining migrations..."
-    docker-compose exec -T web python manage.py migrate admin --fake
-    docker-compose exec -T web python manage.py migrate sessions --fake
+    # Run a final migrate to ensure everything is in sync
+    log "Running final migration check..."
+    docker-compose exec -T web python manage.py migrate --fake-initial
 
     # Verify migration status
     log "Verifying migration status..."

@@ -90,6 +90,11 @@ with connection.cursor() as cursor:
         DROP TABLE IF EXISTS auth_user_groups CASCADE;
         DROP TABLE IF EXISTS auth_user_user_permissions CASCADE;
         DROP TABLE IF EXISTS auth_group CASCADE;
+        
+        -- Add these lines for M2M tables auto-created by CustomUser
+        DROP TABLE IF EXISTS main_customuser_groups CASCADE;
+        DROP TABLE IF EXISTS main_customuser_user_permissions CASCADE;
+
         DROP TABLE IF EXISTS main_customuser CASCADE;
         DROP TABLE IF EXISTS main_video CASCADE;
     ''')

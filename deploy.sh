@@ -82,6 +82,7 @@ from django.db import connection
 with connection.cursor() as cursor:
     # Drop existing migration history
     cursor.execute('DROP TABLE IF EXISTS django_migrations;')
+    cursor.execute('DROP TABLE IF EXISTS django_content_type;')
     
     # Recreate migrations table
     cursor.execute('''
@@ -90,6 +91,16 @@ with connection.cursor() as cursor:
             app VARCHAR(255) NOT NULL,
             name VARCHAR(255) NOT NULL,
             applied TIMESTAMP WITH TIME ZONE NOT NULL
+        );
+    ''')
+    
+    # Create content type table with correct structure
+    cursor.execute('''
+        CREATE TABLE django_content_type (
+            id SERIAL PRIMARY KEY,
+            app_label VARCHAR(100) NOT NULL,
+            model VARCHAR(100) NOT NULL,
+            CONSTRAINT django_content_type_app_label_model_unique UNIQUE (app_label, model)
         );
     ''')
 "
@@ -102,15 +113,21 @@ with connection.cursor() as cursor:
     log "Creating fresh migrations..."
     docker-compose exec -T web python manage.py makemigrations main
 
-    # Apply migrations with fake-initial for main app first
+    # Apply contenttypes migrations first
+    log "Applying contenttypes migrations..."
+    docker-compose exec -T web python manage.py migrate contenttypes --fake-initial
+
+    # Apply auth migrations next
+    log "Applying auth migrations..."
+    docker-compose exec -T web python manage.py migrate auth --fake-initial
+
+    # Apply main app migrations
     log "Applying main app migrations..."
     docker-compose exec -T web python manage.py migrate main --fake-initial
 
-    # Apply other migrations
+    # Apply remaining migrations
     log "Applying remaining migrations..."
-    docker-compose exec -T web python manage.py migrate auth --fake
     docker-compose exec -T web python manage.py migrate admin --fake
-    docker-compose exec -T web python manage.py migrate contenttypes --fake
     docker-compose exec -T web python manage.py migrate sessions --fake
 
     # Verify migration status

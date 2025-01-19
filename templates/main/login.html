@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Login - Premium App{% endblock %}
+
+{% block content %}
+<div class="flex min-h-[80vh] items-center justify-center">
+    <div class="glass-card p-8 rounded-2xl w-full max-w-md">
+        <h2 class="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-violet-400 text-transparent bg-clip-text text-center">
+            Welcome Back
+        </h2>
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            <div>
+                <label class="block text-sm font-medium mb-2">Email or Username</label>
+                <input type="text" name="login_identifier" required
+                       class="premium-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none"
+                       placeholder="Enter your email or username">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">Password</label>
+                <input type="password" name="password" required
+                       class="premium-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none"
+                       placeholder="Enter your password">
+            </div>
+            <button type="submit" 
+                    class="premium-button w-full py-3 px-4 rounded-lg text-white font-medium">
+                Sign In
+            </button>
+        </form>
+        <p class="mt-6 text-center text-sm text-gray-400">
+            Don't have an account?
+            <a href="{% url 'main:register' %}" class="text-blue-400 hover:text-blue-300">Register here</a>
+        </p>
+    </div>
+</div>
+{% endblock %} 

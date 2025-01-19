@@ -70,20 +70,28 @@ except Exception as e:
 handle_migrations() {
     log "Handling database migrations..."
     
-    # First, try to fake all existing migrations to establish a baseline
-    log "Establishing migration baseline..."
-    docker-compose exec -T web python manage.py migrate --fake contenttypes zero || true
-    docker-compose exec -T web python manage.py migrate --fake auth zero || true
-    docker-compose exec -T web python manage.py migrate --fake admin zero || true
-    docker-compose exec -T web python manage.py migrate --fake sessions zero || true
-    docker-compose exec -T web python manage.py migrate --fake main zero || true
-
-    # Clear migration history from the database
-    log "Clearing migration history..."
+    # First, clear the migration history and tables
+    log "Clearing migration state..."
     docker-compose exec -T web python -c "
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+import django
+django.setup()
 from django.db import connection
-cursor = connection.cursor()
-cursor.execute('DELETE FROM django_migrations;')
+
+with connection.cursor() as cursor:
+    # Drop existing migration history
+    cursor.execute('DROP TABLE IF EXISTS django_migrations;')
+    
+    # Recreate migrations table
+    cursor.execute('''
+        CREATE TABLE django_migrations (
+            id SERIAL PRIMARY KEY,
+            app VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            applied TIMESTAMP WITH TIME ZONE NOT NULL
+        );
+    ''')
 "
 
     # Remove all existing migrations except __init__.py
@@ -94,17 +102,20 @@ cursor.execute('DELETE FROM django_migrations;')
     log "Creating fresh migrations..."
     docker-compose exec -T web python manage.py makemigrations main
 
-    # Apply migrations with fake-initial
-    log "Applying migrations..."
-    docker-compose exec -T web python manage.py migrate --fake-initial main
-    docker-compose exec -T web python manage.py migrate --fake auth
-    docker-compose exec -T web python manage.py migrate --fake admin
-    docker-compose exec -T web python manage.py migrate --fake contenttypes
-    docker-compose exec -T web python manage.py migrate --fake sessions
+    # Apply migrations with fake-initial for main app first
+    log "Applying main app migrations..."
+    docker-compose exec -T web python manage.py migrate main --fake-initial
 
-    # Finally, apply any real migrations that might be needed
-    log "Applying any remaining migrations..."
-    docker-compose exec -T web python manage.py migrate --no-input
+    # Apply other migrations
+    log "Applying remaining migrations..."
+    docker-compose exec -T web python manage.py migrate auth --fake
+    docker-compose exec -T web python manage.py migrate admin --fake
+    docker-compose exec -T web python manage.py migrate contenttypes --fake
+    docker-compose exec -T web python manage.py migrate sessions --fake
+
+    # Verify migration status
+    log "Verifying migration status..."
+    docker-compose exec -T web python manage.py showmigrations
 
     log "Migration handling completed"
 }

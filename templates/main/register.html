@@ -3,45 +3,43 @@
 {% block title %}Register - Premium App{% endblock %}
 
 {% block content %}
-<div class="flex min-h-[80vh] items-center justify-center">
-    <div class="glass-card p-8 rounded-2xl w-full max-w-md">
-        <h2 class="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-violet-400 text-transparent bg-clip-text text-center">
-            Create Account
-        </h2>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-violet-500 py-10">
+    <div class="bg-white bg-opacity-90 rounded-2xl shadow-lg w-full max-w-md p-8">
+        <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Create an Account</h2>
         <form method="post" class="space-y-6">
             {% csrf_token %}
             <div>
-                <label class="block text-sm font-medium mb-2">Email</label>
+                <label class="block text-sm font-medium mb-2 text-gray-700">Email</label>
                 <input type="email" name="email" required
-                       class="premium-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none"
+                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:outline-none"
                        placeholder="Enter your email">
             </div>
             <div>
-                <label class="block text-sm font-medium mb-2">Username</label>
+                <label class="block text-sm font-medium mb-2 text-gray-700">Username</label>
                 <input type="text" name="username" required
-                       class="premium-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none"
+                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:outline-none"
                        placeholder="Choose a username">
             </div>
             <div>
-                <label class="block text-sm font-medium mb-2">Password</label>
+                <label class="block text-sm font-medium mb-2 text-gray-700">Password</label>
                 <input type="password" name="password" required
-                       class="premium-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none"
+                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:outline-none"
                        placeholder="Create a password">
             </div>
             <div>
-                <label class="block text-sm font-medium mb-2">Confirm Password</label>
+                <label class="block text-sm font-medium mb-2 text-gray-700">Confirm Password</label>
                 <input type="password" name="confirm_password" required
-                       class="premium-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 focus:outline-none"
+                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:outline-none"
                        placeholder="Confirm your password">
             </div>
-            <button type="submit" 
-                    class="premium-button w-full py-3 px-4 rounded-lg text-white font-medium">
+            <button type="submit"
+                    class="w-full py-3 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
                 Create Account
             </button>
         </form>
-        <p class="mt-6 text-center text-sm text-gray-400">
+        <p class="mt-6 text-center text-sm text-gray-500">
             Already have an account?
-            <a href="{% url 'main:login' %}" class="text-blue-400 hover:text-blue-300">Sign in here</a>
+            <a href="{% url 'main:login' %}" class="text-indigo-600 hover:text-indigo-500">Sign in here</a>
         </p>
     </div>
 </div>

@@ -403,13 +403,17 @@
                     <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 lg:mb-12 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-hero-delay-2">
                         Let our intelligent bot handle your TikTok comments while you focus on creating amazing content. Set it up once, grow forever.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-hero-delay-3">
-                        <a href="#" class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full text-base sm:text-lg font-semibold transition-all hover-up text-center">
-                            Start Free Trial
+                    <div class="text-center mt-6">
+                        <!-- "Get Started" -> Register -->
+                        <a href="{% url 'main:register' %}" 
+                           class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg mx-2">
+                            Get Started
                         </a>
-                        <a href="#" class="w-full sm:w-auto bg-white border-2 border-gray-200 hover:border-primary/30 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full text-base sm:text-lg font-semibold transition-all hover-up flex items-center justify-center gap-2">
-                            <i class="fas fa-play-circle text-primary"></i>
-                            Watch Demo
+
+                        <!-- "Start Free Trial" -> Login (to prompt user to sign up or log in) -->
+                        <a href="{% url 'main:login' %}"
+                           class="inline-block bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg mx-2">
+                            Start Free Trial
                         </a>
                     </div>
                 </div>

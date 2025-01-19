@@ -103,16 +103,6 @@ with connection.cursor() as cursor:
             applied TIMESTAMP WITH TIME ZONE NOT NULL
         );
     ''')
-    
-    # Create content type table with correct structure
-    cursor.execute('''
-        CREATE TABLE django_content_type (
-            id SERIAL PRIMARY KEY,
-            app_label VARCHAR(100) NOT NULL,
-            model VARCHAR(100) NOT NULL,
-            CONSTRAINT django_content_type_app_label_model_unique UNIQUE (app_label, model)
-        );
-    ''')
 "
 
     # Remove all existing migrations except __init__.py

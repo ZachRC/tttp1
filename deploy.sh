@@ -66,6 +66,30 @@ except Exception as e:
     fi
 }
 
+# Function to handle database migrations
+handle_migrations() {
+    log "Handling database migrations..."
+    
+    # Remove any existing migration files except __init__.py and 0001_initial
+    docker-compose exec -T web bash -c "cd main/migrations && find . -type f ! -name '__init__.py' ! -name '0001_initial.py' -delete"
+    
+    # Fake migrations that have already been applied
+    log "Faking initial migrations..."
+    docker-compose exec -T web python manage.py migrate --fake main zero
+    docker-compose exec -T web python manage.py migrate --fake auth zero
+    docker-compose exec -T web python manage.py migrate --fake admin zero
+    docker-compose exec -T web python manage.py migrate --fake contenttypes zero
+    docker-compose exec -T web python manage.py migrate --fake sessions zero
+    
+    # Make fresh migrations
+    log "Creating fresh migrations..."
+    docker-compose exec -T web python manage.py makemigrations
+    
+    # Apply migrations
+    log "Applying migrations..."
+    docker-compose exec -T web python manage.py migrate --fake-initial
+}
+
 # Update system packages
 log "Updating system packages..."
 sudo apt-get update
@@ -111,12 +135,8 @@ while [ $retry_count -lt $max_retries ]; do
     fi
 done
 
-# Make and apply migrations
-log "Making migrations..."
-docker-compose exec -T web python manage.py makemigrations
-
-log "Applying database migrations..."
-docker-compose exec -T web python manage.py migrate
+# Handle database migrations
+handle_migrations
 
 # Collect static files
 log "Collecting static files..."

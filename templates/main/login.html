@@ -3,74 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Premium App</title>
-  <!-- Tailwind CSS -->
+  <title>Login - AutoTok</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Any additional <head> content can go here, e.g. custom CSS, scripts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF0050',
+            secondary: '#00f2ea',
+            light: '#f8fafc',
+            accent: '#818cf8'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #FF0050, #00f2ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, rgba(255,0,80,0.1), rgba(0,242,234,0.1));
+    }
+    .card-shadow {
+      box-shadow: 0 0 60px rgba(0,0,0,0.1);
+    }
+    .glass-effect {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.7);
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-hero {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .animate-hero-delay-1 {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    }
+  </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-light text-gray-800 overflow-x-hidden">
   <!-- Navigation -->
-  <nav class="bg-white border-b border-gray-100 fixed w-full z-10 top-0 left-0">
+  <nav class="sticky top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
         <div class="flex-shrink-0">
-          <a href="/" class="flex items-center text-blue-500 font-bold text-xl">
-            <!-- Example Logo Icon -->
-            <svg class="w-8 h-8 mr-1" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true">
-              <path d="M12 2l9 5-9 5-9-5 9-5z" />
-              <path d="M12 22l9-5-9-5-9 5 9 5z" />
-              <path d="M12 12l9-5-9-5-9 5 9 5z" />
-            </svg>
-            Premium App
+          <a href="/" class="flex items-center">
+            <span class="text-2xl font-bold gradient-text">AutoTok</span>
           </a>
         </div>
-        <!-- Responsive toggles, if needed, for mobile could go here -->
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-24 px-4 gradient-bg overflow-hidden bg-gradient-to-r from-blue-500 to-violet-500 min-h-screen">
-    <div class="max-w-7xl mx-auto flex flex-col items-center text-center text-white">
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-        Welcome Back
-      </h1>
-      <p class="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-2xl mb-8">
-        Log in to manage your TikTok automation and stay on top of your campaigns.
-      </p>
-    </div>
-    
-    <!-- Login Form Section -->
-    <div class="max-w-md mx-auto mt-8 p-6 bg-white bg-opacity-90 rounded-2xl shadow-lg">
-      <h2 class="text-2xl font-bold mb-4 text-center text-gray-800">
-        Sign In
-      </h2>
-      <form method="post" class="space-y-6">
-        {% csrf_token %}
-        <div>
-          <label class="block text-sm font-medium mb-2 text-gray-700">Email or Username</label>
-          <input type="text" name="login_identifier" required
-                 class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:outline-none"
-                 placeholder="Enter your email or username">
+  <!-- Login Section -->
+  <section class="pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-24 px-4 gradient-bg min-h-screen">
+    <div class="max-w-7xl mx-auto flex flex-col items-center">
+      <div class="text-center mb-12 animate-hero">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          Welcome Back to <span class="gradient-text">AutoTok</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+          Log in to manage your TikTok automation and stay on top of your campaigns.
+        </p>
+      </div>
+      
+      <!-- Login Form -->
+      <div class="w-full max-w-md animate-hero-delay-1">
+        <div class="bg-white/90 backdrop-blur-md rounded-3xl p-8 card-shadow border border-gray-100/50">
+          <form method="post" class="space-y-6">
+            {% csrf_token %}
+            <div>
+              <label class="block text-sm font-medium mb-2 text-gray-700">Email or Username</label>
+              <input type="text" name="login_identifier" required
+                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
+                     placeholder="Enter your email or username">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2 text-gray-700">Password</label>
+              <input type="password" name="password" required
+                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all"
+                     placeholder="Enter your password">
+            </div>
+            <button type="submit"
+                    class="w-full py-3 px-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-medium hover:opacity-90 transition-all">
+              Login
+            </button>
+          </form>
+          <p class="mt-6 text-center text-sm text-gray-600">
+            Don't have an account?
+            <a href="{% url 'main:register' %}" class="text-primary hover:text-primary/80 font-semibold">Register here</a>
+          </p>
         </div>
-        <div>
-          <label class="block text-sm font-medium mb-2 text-gray-700">Password</label>
-          <input type="password" name="password" required
-                 class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:outline-none"
-                 placeholder="Enter your password">
-        </div>
-        <button type="submit"
-                class="w-full py-3 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
-          Login
-        </button>
-      </form>
-      <p class="mt-4 text-center text-sm text-gray-700">
-        Don't have an account?
-        <a href="{% url 'main:register' %}" class="text-indigo-600 hover:text-indigo-500 font-semibold">Register here</a>
-      </p>
+      </div>
     </div>
   </section>
 </body>

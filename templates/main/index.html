@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="overflow-x-hidden">
+<html lang="en" class="!overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AutoTok - Automated TikTok Engagement Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,6 +22,14 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
+        /* Force hide horizontal overflow at root level */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
@@ -350,12 +358,50 @@
             z-index: -1;
             border-radius: 9999px;
         }
+
+        /* Adjust container for mobile */
+        .container-fluid {
+            width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+        }
+
+        /* Fix absolute positioned elements */
+        .absolute-safe {
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 100vw;
+        }
+
+        /* Ensure floating elements don't cause overflow */
+        .blur-element {
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        /* Adjust grid items for mobile */
+        @media (max-width: 640px) {
+            .grid {
+                margin-left: -1rem;
+                margin-right: -1rem;
+                width: calc(100% + 2rem);
+            }
+            
+            .grid > * {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-light text-gray-800 overflow-x-hidden min-w-[320px]">
+<body class="bg-light text-gray-800 !overflow-x-hidden">
     <!-- Navigation -->
     <nav class="sticky top-0 left-0 right-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div class="max-w-7xl w-full mx-auto px-4 relative">
+        <div class="container-fluid max-w-7xl mx-auto relative">
             <div class="flex items-center justify-between h-16 sm:h-20">
                 <div class="flex items-center">
                     <span class="text-xl sm:text-2xl lg:text-3xl font-bold gradient-text">AutoTok</span>
@@ -389,8 +435,8 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-16 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-16 px-4 gradient-bg overflow-hidden">
-        <div class="max-w-7xl mx-auto">
+    <section class="relative pt-16 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-16 gradient-bg overflow-hidden">
+        <div class="container-fluid max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
                 <!-- Text Content -->
                 <div class="text-center lg:text-left order-2 lg:order-1">
@@ -535,18 +581,17 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 3D Floating Elements - Responsive sizing -->
-                    <div class="absolute -top-8 sm:-left-8 left-0 w-16 sm:w-20 h-16 sm:h-20 bg-primary/10 rounded-full blur-xl animate-pulse transform rotate-45"></div>
-                    <div class="absolute -bottom-8 sm:-right-8 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-secondary/10 rounded-full blur-xl animate-pulse delay-700 transform -rotate-45"></div>
                 </div>
             </div>
         </div>
+        <!-- Adjust floating elements -->
+        <div class="absolute -top-8 sm:-left-8 left-0 w-16 sm:w-20 h-16 sm:h-20 bg-primary/10 rounded-full blur-xl animate-pulse transform rotate-45 blur-element"></div>
+        <div class="absolute -bottom-8 sm:-right-8 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-secondary/10 rounded-full blur-xl animate-pulse delay-700 transform -rotate-45 blur-element"></div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-12 sm:py-16 lg:py-24 px-4 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto relative">
+    <section id="features" class="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
+        <div class="container-fluid max-w-7xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-8 sm:mb-12 lg:mb-16 relative feature-hidden">
                 <div class="inline-block">
@@ -691,11 +736,14 @@
                 </div>
             </div>
         </div>
+        <!-- Adjust background blurs -->
+        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] feature-hidden blur-element"></div>
+        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] feature-hidden blur-element"></div>
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works" class="py-16 sm:py-20 lg:py-24 px-4 gradient-bg relative overflow-hidden">
-        <div class="max-w-7xl mx-auto relative">
+    <section id="how-it-works" class="relative py-16 sm:py-20 lg:py-24 gradient-bg overflow-hidden">
+        <div class="container-fluid max-w-7xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-8 sm:mb-12 lg:mb-16 relative">
                 <div class="inline-block">
@@ -778,8 +826,8 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-16 sm:py-20 lg:py-24 px-4 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto relative">
+    <section id="pricing" class="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
+        <div class="container-fluid max-w-7xl mx-auto">
             <!-- Pricing Header -->
             <div class="text-center mb-8 sm:mb-12 lg:mb-16 relative pricing-card-hidden">
                 <div class="inline-block">
@@ -1035,8 +1083,8 @@
     </section>
 
     <!-- Enhanced CTA Section -->
-    <section class="py-16 sm:py-20 lg:py-24 px-4 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto relative">
+    <section class="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
+        <div class="container-fluid max-w-4xl mx-auto">
             <!-- Content Wrapper with adjusted padding -->
             <div class="relative bg-white/30 backdrop-blur-lg rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl cta-hidden">
                 <div class="text-center relative">
@@ -1288,6 +1336,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
+            const body = document.body;
             
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', function() {
@@ -1295,23 +1344,27 @@
                     
                     if (isExpanded) {
                         mobileMenu.classList.remove('hidden');
+                        body.style.overflow = 'hidden';
                     } else {
                         mobileMenu.classList.add('hidden');
+                        body.style.overflow = '';
                     }
                 });
 
-                // Close menu when clicking outside
+                // Close menu handlers
+                const closeMenu = () => {
+                    mobileMenu.classList.add('hidden');
+                    body.style.overflow = '';
+                };
+
                 document.addEventListener('click', function(event) {
                     if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-                        mobileMenu.classList.add('hidden');
+                        closeMenu();
                     }
                 });
 
-                // Close menu when clicking a link
                 mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.add('hidden');
-                    });
+                    link.addEventListener('click', closeMenu);
                 });
             }
         });

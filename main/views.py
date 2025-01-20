@@ -229,3 +229,12 @@ def terms_of_service(request):
 
 def cookie_policy(request):
     return render(request, 'main/legal/cookie_policy.html')
+
+def about(request):
+    return render(request, 'main/company/about.html')
+
+def blog(request):
+    return render(request, 'main/company/blog.html')
+
+def careers(request):
+    return render(request, 'main/company/careers.html')

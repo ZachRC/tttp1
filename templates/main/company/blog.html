@@ -1,0 +1,143 @@
+{% extends 'main/legal/base_legal.html' %}
+
+{% block title %}Blog - AutoTok{% endblock %}
+
+{% block header %}AutoTok Blog{% endblock %}
+
+{% block header_description %}
+    Insights, updates, and tips for TikTok creators
+{% endblock %}
+
+{% block content %}
+    <div class="space-y-12">
+        <!-- Featured Post -->
+        <section>
+            <div class="relative rounded-2xl overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-10"></div>
+                <div class="relative p-8 sm:p-12">
+                    <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">Featured</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4">Maximizing Your TikTok Engagement with AI</h2>
+                    <p class="text-gray-600 mb-6">Learn how artificial intelligence is revolutionizing the way creators interact with their audience and grow their following.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
+                                <i class="fas fa-user text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Sarah Johnson</p>
+                                <p class="text-sm text-gray-500">CEO & Founder</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">January 15, 2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Posts -->
+        <section>
+            <h2 class="text-2xl font-bold mb-8">Latest Posts</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Post 1 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-4xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">Growth</span>
+                        <h3 class="text-xl font-bold mb-3">Understanding TikTok's Algorithm</h3>
+                        <p class="text-gray-600 mb-4">Deep dive into how TikTok decides which videos to show to which users.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>By Michael Chen</span>
+                            <span>January 10, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                        <i class="fas fa-comments text-4xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">Engagement</span>
+                        <h3 class="text-xl font-bold mb-3">Crafting Engaging Comments</h3>
+                        <p class="text-gray-600 mb-4">Tips and tricks for writing comments that spark meaningful conversations.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>By Emily Rodriguez</span>
+                            <span>January 8, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                        <i class="fas fa-robot text-4xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">Technology</span>
+                        <h3 class="text-xl font-bold mb-3">The Future of AI in Social Media</h3>
+                        <p class="text-gray-600 mb-4">Exploring how AI is shaping the future of creator-audience interactions.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>By Michael Chen</span>
+                            <span>January 5, 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
+                    <div class="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                        <i class="fas fa-bullseye text-4xl text-primary"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">Strategy</span>
+                        <h3 class="text-xl font-bold mb-3">Building Your TikTok Strategy</h3>
+                        <p class="text-gray-600 mb-4">A comprehensive guide to creating a winning TikTok content strategy.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>By Sarah Johnson</span>
+                            <span>January 3, 2024</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6">Categories</h2>
+            <div class="flex flex-wrap gap-4">
+                <a href="#" class="px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 hover:from-primary/10 hover:to-secondary/10 transition-all text-gray-700 font-medium">
+                    Growth Strategies
+                </a>
+                <a href="#" class="px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 hover:from-primary/10 hover:to-secondary/10 transition-all text-gray-700 font-medium">
+                    Technology
+                </a>
+                <a href="#" class="px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 hover:from-primary/10 hover:to-secondary/10 transition-all text-gray-700 font-medium">
+                    Engagement Tips
+                </a>
+                <a href="#" class="px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 hover:from-primary/10 hover:to-secondary/10 transition-all text-gray-700 font-medium">
+                    Case Studies
+                </a>
+                <a href="#" class="px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 hover:from-primary/10 hover:to-secondary/10 transition-all text-gray-700 font-medium">
+                    Updates
+                </a>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-8 text-center">
+            <h2 class="text-2xl font-bold mb-4">Stay Updated</h2>
+            <p class="text-gray-600 mb-6">Get the latest insights and tips delivered straight to your inbox</p>
+            <form class="max-w-md mx-auto">
+                <div class="flex gap-4">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-primary">
+                    <button type="submit" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-full font-semibold transition-all">
+                        Subscribe
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %} 

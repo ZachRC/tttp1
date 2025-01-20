@@ -785,9 +785,9 @@
                         <!-- Video Player -->
                         <div class="relative aspect-video rounded-3xl overflow-hidden">
                             <video 
+                                id="demoVideo"
                                 class="w-full h-full object-cover pointer-events-none"
-                                preload="metadata"
-                                poster="{{ video.video.url|add:'.jpg' }}"
+                                preload="auto"
                                 muted
                                 playsinline
                                 loop
@@ -795,20 +795,68 @@
                                 <source src="{{ video.video.url }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
+                            
+                            <!-- Loading State -->
+                            <div id="videoLoading" class="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm transition-opacity duration-300">
+                                <div class="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+                            </div>
+                            
+                            <!-- Error State -->
+                            <div id="videoError" class="hidden absolute inset-0 flex items-center justify-center bg-white/90">
+                                <div class="text-center">
+                                    <i class="fas fa-exclamation-circle text-4xl text-primary mb-4"></i>
+                                    <p class="text-gray-600">Unable to load video</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Video Controls Script -->
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            const video = document.querySelector('video');
+                            const video = document.getElementById('demoVideo');
+                            const loadingState = document.getElementById('videoLoading');
+                            const errorState = document.getElementById('videoError');
                             
-                            // Create an Intersection Observer
+                            if (!video) return;
+
+                            // Loading state handling
+                            function showLoading() {
+                                if (loadingState) loadingState.style.opacity = '1';
+                            }
+                            
+                            function hideLoading() {
+                                if (loadingState) {
+                                    loadingState.style.opacity = '0';
+                                    setTimeout(() => {
+                                        loadingState.style.display = 'none';
+                                    }, 300);
+                                }
+                            }
+                            
+                            function showError() {
+                                if (errorState) errorState.classList.remove('hidden');
+                                if (loadingState) loadingState.style.display = 'none';
+                            }
+
+                            // Video event listeners
+                            video.addEventListener('loadstart', showLoading);
+                            video.addEventListener('canplay', hideLoading);
+                            video.addEventListener('error', showError);
+                            
+                            // Create an Intersection Observer for play/pause
                             const videoObserver = new IntersectionObserver((entries) => {
                                 entries.forEach(entry => {
-                                    // Play video when it enters the viewport
                                     if (entry.isIntersecting) {
-                                        video.play();
+                                        // Only attempt to play if the video is ready
+                                        if (video.readyState >= 3) {
+                                            const playPromise = video.play();
+                                            if (playPromise !== undefined) {
+                                                playPromise.catch(error => {
+                                                    console.warn('Video play failed:', error);
+                                                });
+                                            }
+                                        }
                                     } else {
                                         video.pause();
                                     }
@@ -818,14 +866,33 @@
                             });
 
                             // Start observing the video
-                            if (video) {
-                                videoObserver.observe(video);
+                            videoObserver.observe(video);
 
-                                // Handle video errors
-                                video.addEventListener('error', function() {
-                                    console.error('Error playing video');
-                                });
-                            }
+                            // Additional event listeners for better playback handling
+                            video.addEventListener('waiting', showLoading);
+                            video.addEventListener('playing', hideLoading);
+                            video.addEventListener('stalled', () => {
+                                // If video stalls, try to recover
+                                if (video.paused) {
+                                    const playPromise = video.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.catch(() => {
+                                            // If recovery fails, show error
+                                            showError();
+                                        });
+                                    }
+                                }
+                            });
+
+                            // Periodic check for video health
+                            setInterval(() => {
+                                if (video.paused && !video.ended && video.currentTime > 0) {
+                                    const playPromise = video.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.catch(() => {});
+                                    }
+                                }
+                            }, 5000);
                         });
                     </script>
                 {% else %}

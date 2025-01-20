@@ -435,34 +435,36 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-16 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-16 gradient-bg overflow-hidden">
+    <section class="relative pt-20 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-16 gradient-bg overflow-hidden">
         <div class="container-fluid max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Text Content -->
-                <div class="text-center lg:text-left order-2 lg:order-1">
-                    <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 animate-hero">
-                        Automate with Confidence
-                    </span>
-                    <h1 class="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight animate-hero-delay-1">
-                        Supercharge Your <span class="gradient-text">TikTok</span> Engagement
-                    </h1>
-                    <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-hero-delay-2">
-                        Let our intelligent bot handle your TikTok comments while you focus on creating amazing content. Set it up once, grow forever.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 sm:gap-6">
-                        <a href="{% url 'main:register' %}" 
-                           class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all">
-                            Get Started
-                        </a>
-                        <a href="{% url 'main:register' %}"
-                           class="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all">
-                            Start Free Trial
-                        </a>
+                <div class="text-center lg:text-left order-2 lg:order-1 px-4 sm:px-6 lg:px-0">
+                    <div class="max-w-md mx-auto lg:mx-0">
+                        <span class="inline-flex px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 animate-hero">
+                            Automate with Confidence
+                        </span>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight animate-hero-delay-1">
+                            Supercharge Your <span class="gradient-text">TikTok</span> Engagement
+                        </h1>
+                        <p class="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed animate-hero-delay-2">
+                            Let our intelligent bot handle your TikTok comments while you focus on creating amazing content. Set it up once, grow forever.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 animate-hero-delay-2">
+                            <a href="{% url 'main:register' %}" 
+                               class="w-full sm:w-auto inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-8 rounded-xl shadow-lg transition-all">
+                                Get Started
+                            </a>
+                            <a href="{% url 'main:register' %}"
+                               class="w-full sm:w-auto inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-semibold py-4 px-8 rounded-xl shadow-lg transition-all">
+                                Start Free Trial
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Dashboard Preview -->
-                <div class="relative order-1 lg:order-2 mx-auto lg:mx-0 w-full max-w-[85%] sm:max-w-[75%] lg:max-w-none animate-dashboard">
+                <div class="relative order-1 lg:order-2 w-[90%] sm:w-[85%] lg:w-full mx-auto animate-dashboard">
                     <div class="relative dashboard-3d glass-effect rounded-2xl sm:rounded-3xl depth-shadow p-3 sm:p-4 lg:p-6 transition-all duration-500 border border-gray-100/50">
                         <!-- Dashboard Header with Gradient Border -->
                         <div class="relative mb-3 sm:mb-4 lg:mb-6 floating-stats">
@@ -470,10 +472,8 @@
                             <div class="relative glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2 sm:gap-3">
-                                        <div class="relative hidden sm:block">
-                                            <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm">
-                                                <i class="fas fa-chart-bar text-primary text-sm sm:text-base"></i>
-                                            </div>
+                                        <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm">
+                                            <i class="fas fa-chart-bar text-primary text-sm sm:text-base"></i>
                                         </div>
                                         <div>
                                             <h3 class="text-sm sm:text-base lg:text-lg font-semibold">AutoTok Dashboard</h3>
@@ -492,26 +492,26 @@
                         <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 lg:mb-6">
                             <!-- Comments Today -->
                             <div class="glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
-                                <p class="text-xs sm:text-sm text-gray-500 mb-1">Comments today</p>
+                                <p class="text-[10px] sm:text-xs lg:text-sm text-gray-500 mb-1">Comments today</p>
                                 <div class="flex items-baseline gap-1 sm:gap-2">
-                                    <span class="text-lg sm:text-xl lg:text-2xl font-bold">247</span>
-                                    <span class="text-xs text-green-500">+12% vs yesterday</span>
+                                    <span class="text-base sm:text-lg lg:text-xl font-bold">247</span>
+                                    <span class="text-[8px] sm:text-xs text-green-500">+12% vs yesterday</span>
                                 </div>
                             </div>
                             <!-- Active Accounts -->
                             <div class="glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
-                                <p class="text-xs sm:text-sm text-gray-500 mb-1">Active Accounts</p>
+                                <p class="text-[10px] sm:text-xs lg:text-sm text-gray-500 mb-1">Active Accounts</p>
                                 <div class="flex items-baseline gap-1 sm:gap-2">
-                                    <span class="text-lg sm:text-xl lg:text-2xl font-bold">5</span>
-                                    <span class="text-xs text-gray-400">of 5 total</span>
+                                    <span class="text-base sm:text-lg lg:text-xl font-bold">5</span>
+                                    <span class="text-[8px] sm:text-xs text-gray-400">of 5 total</span>
                                 </div>
                             </div>
                             <!-- Engagement Rate -->
                             <div class="glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
-                                <p class="text-xs sm:text-sm text-gray-500 mb-1">Engagement Rate</p>
+                                <p class="text-[10px] sm:text-xs lg:text-sm text-gray-500 mb-1">Engagement Rate</p>
                                 <div class="flex items-baseline gap-1 sm:gap-2">
-                                    <span class="text-lg sm:text-xl lg:text-2xl font-bold">8.2%</span>
-                                    <span class="text-xs text-green-500">↑ 2.1% this week</span>
+                                    <span class="text-base sm:text-lg lg:text-xl font-bold">8.2%</span>
+                                    <span class="text-[8px] sm:text-xs text-green-500">↑ 2.1% this week</span>
                                 </div>
                             </div>
                         </div>

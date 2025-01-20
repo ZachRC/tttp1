@@ -462,89 +462,68 @@
                 </div>
 
                 <!-- Dashboard Preview -->
-                <div class="relative order-1 lg:order-2 mx-auto lg:mx-0 w-full max-w-[90%] sm:max-w-[80%] lg:max-w-none animate-dashboard">
-                    <div class="relative dashboard-3d glass-effect rounded-3xl depth-shadow p-3 sm:p-4 lg:p-6 transition-all duration-500 border border-gray-100/50">
+                <div class="relative order-1 lg:order-2 mx-auto lg:mx-0 w-full max-w-[85%] sm:max-w-[75%] lg:max-w-none animate-dashboard">
+                    <div class="relative dashboard-3d glass-effect rounded-2xl sm:rounded-3xl depth-shadow p-3 sm:p-4 lg:p-6 transition-all duration-500 border border-gray-100/50">
                         <!-- Dashboard Header with Gradient Border -->
-                        <div class="relative mb-4 sm:mb-8 floating-stats">
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-lg"></div>
-                            <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50">
+                        <div class="relative mb-3 sm:mb-4 lg:mb-6 floating-stats">
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl sm:rounded-2xl blur-lg"></div>
+                            <div class="relative glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
                                 <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-3 sm:gap-4">
+                                    <div class="flex items-center gap-2 sm:gap-3">
                                         <div class="relative hidden sm:block">
-                                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-xl blur"></div>
-                                            <div class="relative w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-white flex items-center justify-center border border-gray-100">
-                                                <i class="fas fa-robot text-xl sm:text-2xl gradient-text"></i>
+                                            <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm">
+                                                <i class="fas fa-chart-bar text-primary text-sm sm:text-base"></i>
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 class="text-base sm:text-xl font-bold">AutoTok Dashboard</h3>
-                                            <div class="flex items-center gap-2">
-                                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                                <p class="text-xs sm:text-sm text-gray-600">3 Active Campaigns</p>
-                                            </div>
+                                            <h3 class="text-sm sm:text-base lg:text-lg font-semibold">AutoTok Dashboard</h3>
+                                            <p class="text-xs sm:text-sm text-gray-500">3 Active Campaigns</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-center">
-                                        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-green-100/80 text-green-600 rounded-full text-xs sm:text-sm font-medium backdrop-blur-sm whitespace-nowrap">
-                                            <i class="fas fa-check-circle mr-1"></i> All Systems Active
-                                        </span>
+                                    <div class="flex items-center gap-2 px-2 py-1 sm:px-3 sm:py-1.5 bg-green-100/80 rounded-full backdrop-blur-sm">
+                                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></span>
+                                        <span class="text-xs sm:text-sm text-green-700 font-medium">All Systems Active</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Interactive Stats Grid -->
-                        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-8 floating-stats">
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-10">
-                                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-lg transition-all group-hover:blur-xl"></div>
-                                <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50 transition-all hover:border-primary/20">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <p class="text-xs sm:text-sm text-gray-600">Comments Today</p>
-                                        <i class="fas fa-comments text-primary/20 text-sm sm:text-base"></i>
-                                    </div>
-                                    <p class="text-xl sm:text-3xl font-bold mb-1">247</p>
-                                    <div class="flex items-center gap-1 text-green-500 text-xs sm:text-sm">
-                                        <i class="fas fa-arrow-up text-xs"></i>
-                                        <span>12% vs yesterday</span>
-                                    </div>
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                            <!-- Comments Today -->
+                            <div class="glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
+                                <p class="text-xs sm:text-sm text-gray-500 mb-1">Comments today</p>
+                                <div class="flex items-baseline gap-1 sm:gap-2">
+                                    <span class="text-lg sm:text-xl lg:text-2xl font-bold">247</span>
+                                    <span class="text-xs text-green-500">+12% vs yesterday</span>
                                 </div>
                             </div>
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-10">
-                                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-lg transition-all group-hover:blur-xl"></div>
-                                <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50 transition-all hover:border-primary/20">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <p class="text-xs sm:text-sm text-gray-600">Active Accounts</p>
-                                        <i class="fas fa-users text-primary/20 text-sm sm:text-base"></i>
-                                    </div>
-                                    <p class="text-xl sm:text-3xl font-bold mb-1">5</p>
-                                    <div class="flex items-center gap-1 text-gray-500 text-xs sm:text-sm">
-                                        <span>of 5 total</span>
-                                    </div>
+                            <!-- Active Accounts -->
+                            <div class="glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
+                                <p class="text-xs sm:text-sm text-gray-500 mb-1">Active Accounts</p>
+                                <div class="flex items-baseline gap-1 sm:gap-2">
+                                    <span class="text-lg sm:text-xl lg:text-2xl font-bold">5</span>
+                                    <span class="text-xs text-gray-400">of 5 total</span>
                                 </div>
                             </div>
-                            <div class="group relative transform transition-transform duration-300 hover:translate-z-10">
-                                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-lg transition-all group-hover:blur-xl"></div>
-                                <div class="relative glass-effect rounded-2xl p-3 sm:p-4 border border-gray-100/50 transition-all hover:border-primary/20">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <p class="text-xs sm:text-sm text-gray-600">Engagement Rate</p>
-                                        <i class="fas fa-chart-line text-primary/20 text-sm sm:text-base"></i>
-                                    </div>
-                                    <p class="text-xl sm:text-3xl font-bold mb-1">8.2%</p>
-                                    <div class="flex items-center gap-1 text-green-500 text-xs sm:text-sm">
-                                        <i class="fas fa-arrow-up text-xs"></i>
-                                        <span>2.1% this week</span>
-                                    </div>
+                            <!-- Engagement Rate -->
+                            <div class="glass-effect rounded-xl sm:rounded-2xl p-2 sm:p-3 lg:p-4 border border-gray-100/50">
+                                <p class="text-xs sm:text-sm text-gray-500 mb-1">Engagement Rate</p>
+                                <div class="flex items-baseline gap-1 sm:gap-2">
+                                    <span class="text-lg sm:text-xl lg:text-2xl font-bold">8.2%</span>
+                                    <span class="text-xs text-green-500">↑ 2.1% this week</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Activity Feed with Hover Effects -->
+                        <!-- Activity Feed -->
                         <div class="space-y-2 sm:space-y-3 floating-activity">
+                            <!-- Activity Item 1 -->
                             <div class="group relative transform transition-transform duration-300 hover:translate-z-20">
                                 <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-blue-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
-                                <div class="relative flex items-center gap-3 sm:gap-4 glass-effect p-3 sm:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-blue-200">
-                                    <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-blue-100/80 flex items-center justify-center backdrop-blur-sm">
-                                        <i class="fas fa-comment text-blue-500 text-sm sm:text-base"></i>
+                                <div class="relative flex items-center gap-2 sm:gap-3 glass-effect p-2 sm:p-3 lg:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-blue-200">
+                                    <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-lg sm:rounded-xl bg-blue-100/80 flex items-center justify-center backdrop-blur-sm">
+                                        <i class="fas fa-comment text-blue-500 text-xs sm:text-sm"></i>
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs sm:text-sm font-medium truncate">New comment posted</p>
@@ -553,11 +532,13 @@
                                     <span class="text-xs text-gray-400 whitespace-nowrap">2m ago</span>
                                 </div>
                             </div>
+
+                            <!-- Activity Item 2 -->
                             <div class="group relative transform transition-transform duration-300 hover:translate-z-20">
                                 <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-purple-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
-                                <div class="relative flex items-center gap-3 sm:gap-4 glass-effect p-3 sm:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-purple-200">
-                                    <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-purple-100/80 flex items-center justify-center backdrop-blur-sm">
-                                        <i class="fas fa-hashtag text-purple-500 text-sm sm:text-base"></i>
+                                <div class="relative flex items-center gap-2 sm:gap-3 glass-effect p-2 sm:p-3 lg:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-purple-200">
+                                    <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-lg sm:rounded-xl bg-purple-100/80 flex items-center justify-center backdrop-blur-sm">
+                                        <i class="fas fa-hashtag text-purple-500 text-xs sm:text-sm"></i>
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs sm:text-sm font-medium truncate">New hashtag added</p>
@@ -566,11 +547,13 @@
                                     <span class="text-xs text-gray-400 whitespace-nowrap">5m ago</span>
                                 </div>
                             </div>
+
+                            <!-- Activity Item 3 -->
                             <div class="group relative transform transition-transform duration-300 hover:translate-z-20">
                                 <div class="absolute inset-0 bg-gradient-to-r from-green-500/5 to-green-500/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
-                                <div class="relative flex items-center gap-3 sm:gap-4 glass-effect p-3 sm:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-green-200">
-                                    <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-green-100/80 flex items-center justify-center backdrop-blur-sm">
-                                        <i class="fas fa-chart-line text-green-500 text-sm sm:text-base"></i>
+                                <div class="relative flex items-center gap-2 sm:gap-3 glass-effect p-2 sm:p-3 lg:p-4 rounded-xl border border-gray-100/50 transition-all hover:border-green-200">
+                                    <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-lg sm:rounded-xl bg-green-100/80 flex items-center justify-center backdrop-blur-sm">
+                                        <i class="fas fa-chart-line text-green-500 text-xs sm:text-sm"></i>
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs sm:text-sm font-medium truncate">Engagement milestone</p>

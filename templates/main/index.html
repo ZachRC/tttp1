@@ -392,34 +392,31 @@
     <section class="pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-24 px-4 gradient-bg overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <!-- Text Content -->
-                <div class="text-center lg:text-left order-2 lg:order-1">
+                <!-- Hero Section Text Content -->
+                <div class="text-center lg:text-left order-2 lg:order-1 px-4 sm:px-6 lg:px-0">
                     <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 sm:mb-6 animate-hero">
                         Automate with Confidence
                     </span>
-                    <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight animate-hero-delay-1">
+                    <h1 class="text-2xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight animate-hero-delay-1">
                         Supercharge Your <span class="gradient-text">TikTok</span> Engagement
                     </h1>
-                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 lg:mb-12 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-hero-delay-2">
+                    <p class="text-sm sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 lg:mb-12 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-hero-delay-2">
                         Let our intelligent bot handle your TikTok comments while you focus on creating amazing content. Set it up once, grow forever.
                     </p>
-                    <div class="text-center mt-6">
-                        <!-- "Get Started" -> Register -->
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 sm:gap-6 animate-hero-delay-3">
                         <a href="{% url 'main:register' %}" 
-                           class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg mx-2">
+                           class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all">
                             Get Started
                         </a>
-
-                        <!-- "Start Free Trial" -> Login (to prompt user to sign up or log in) -->
-                        <a href="{% url 'main:login' %}"
-                           class="inline-block bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg mx-2">
+                        <a href="{% url 'main:register' %}"
+                           class="w-full sm:w-auto bg-white hover:bg-gray-50 text-primary border-2 border-primary/20 font-bold py-3 px-6 rounded-xl shadow-lg transition-all">
                             Start Free Trial
                         </a>
                     </div>
                 </div>
 
                 <!-- Dashboard Preview -->
-                <div class="relative order-1 lg:order-2 perspective-container mx-auto lg:mx-0 max-w-[95%] sm:max-w-[85%] lg:max-w-none w-full animate-dashboard">
+                <div class="relative order-1 lg:order-2 perspective-container mx-auto lg:mx-0 w-full max-w-[95%] sm:max-w-[85%] lg:max-w-none animate-dashboard px-4 sm:px-6 lg:px-0">
                     <div class="relative dashboard-3d glass-effect rounded-3xl depth-shadow p-4 sm:p-6 transition-all duration-500 border border-gray-100/50">
                         <!-- Dashboard Header with Gradient Border -->
                         <div class="relative mb-4 sm:mb-8 floating-stats">
@@ -548,7 +545,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 sm:py-20 lg:py-24 px-4 relative overflow-hidden">
+    <section id="features" class="py-12 sm:py-20 lg:py-24 px-4 relative overflow-hidden">
         <!-- Background Elements -->
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
         <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] feature-hidden"></div>
@@ -556,145 +553,31 @@
 
         <div class="max-w-7xl mx-auto relative">
             <!-- Header -->
-            <div class="text-center mb-12 sm:mb-16 lg:mb-20 relative feature-hidden">
+            <div class="text-center mb-8 sm:mb-16 lg:mb-20 relative feature-hidden px-4 sm:px-6 lg:px-0">
                 <div class="inline-block">
-                    <span class="text-primary font-semibold mb-3 sm:mb-4 block tracking-wider">POWERFUL FEATURES</span>
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 relative">
+                    <span class="text-primary font-semibold mb-2 sm:mb-4 block tracking-wider text-sm sm:text-base">POWERFUL FEATURES</span>
+                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 relative">
                         Everything You Need
                         <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full gradient-line-hidden"></div>
                     </h2>
                 </div>
-                <p class="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mt-6 sm:mt-8">Streamline your TikTok engagement with our comprehensive suite of automation tools.</p>
+                <p class="text-sm sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mt-4 sm:mt-8">Streamline your TikTok engagement with our comprehensive suite of automation tools.</p>
             </div>
 
             <!-- Features Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative">
-                <!-- Smart Auto-Comments Feature -->
-                <div class="group relative feature-hidden" style="transition-delay: 0.1s">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg transition-all duration-500 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <!-- Icon Container -->
-                        <div class="mb-8 relative feature-icon-hidden">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-6">
-                                <i class="fas fa-robot text-2xl gradient-text"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-4 sm:px-6 lg:px-0">
+                <!-- Feature Cards -->
+                <div class="group relative feature-hidden hover:z-10">
+                    <div class="relative bg-white rounded-3xl p-6 sm:p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
+                        <div class="flex flex-col h-full">
+                            <div class="mb-4 sm:mb-6">
+                                <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6">
+                                    <i class="fas fa-robot text-primary text-xl sm:text-2xl"></i>
+                                </div>
+                                <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">Smart Automation</h3>
+                                <p class="text-sm sm:text-base text-gray-600">Our AI-powered bot handles comments intelligently, maintaining natural engagement.</p>
                             </div>
-                            <div class="absolute top-0 left-0 w-full h-full bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-all"></div>
                         </div>
-
-                        <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Smart Auto-Comments</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">Our AI-powered system analyzes content and timing to leave engaging comments that feel natural and drive interaction.</p>
-                        
-                        <!-- Feature List -->
-                        <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                AI-Powered Analysis
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Natural Language
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Smart Timing
-                            </li>
-                        </ul>
-
-                        <!-- Hover Line -->
-                        <div class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500"></div>
-                    </div>
-                </div>
-
-                <!-- Multi-Account Support Feature -->
-                <div class="group relative lg:translate-y-8 feature-hidden" style="transition-delay: 0.2s">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg transition-all duration-500 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <!-- Icon Container -->
-                        <div class="mb-8 relative feature-icon-hidden">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-6">
-                                <i class="fas fa-cookie text-2xl gradient-text"></i>
-                            </div>
-                            <div class="absolute top-0 left-0 w-full h-full bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-all"></div>
-                        </div>
-
-                        <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Multi-Account Support</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">Securely manage multiple TikTok accounts with our advanced cookie-based authentication system.</p>
-                        
-                        <!-- Feature List -->
-                        <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Secure Authentication
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Multiple Accounts
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Easy Management
-                            </li>
-                        </ul>
-
-                        <!-- Hover Line -->
-                        <div class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500"></div>
-                    </div>
-                </div>
-
-                <!-- Analytics Dashboard Feature -->
-                <div class="group relative feature-hidden" style="transition-delay: 0.3s">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg transition-all duration-500 group-hover:scale-105 opacity-0 group-hover:opacity-100"></div>
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <!-- Icon Container -->
-                        <div class="mb-8 relative feature-icon-hidden">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-6">
-                                <i class="fas fa-chart-line text-2xl gradient-text"></i>
-                            </div>
-                            <div class="absolute top-0 left-0 w-full h-full bg-primary/5 rounded-2xl blur-xl -z-10 group-hover:bg-primary/10 transition-all"></div>
-                        </div>
-
-                        <!-- Content -->
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Analytics Dashboard</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">Track performance metrics, engagement rates, and optimize your automation strategy in real-time.</p>
-                        
-                        <!-- Feature List -->
-                        <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Real-time Tracking
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Performance Metrics
-                            </li>
-                            <li class="flex items-center text-gray-600">
-                                <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                Strategy Insights
-                            </li>
-                        </ul>
-
-                        <!-- Hover Line -->
-                        <div class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-500"></div>
                     </div>
                 </div>
             </div>
@@ -724,7 +607,7 @@
             </div>
 
             <!-- Video Player Container -->
-            <div class="relative max-w-4xl mx-auto">
+            <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
                 {% if video %}
                     <!-- Video Wrapper with Aspect Ratio -->
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white">
@@ -791,360 +674,60 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-4 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pricing-card-hidden"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] pricing-card-hidden"></div>
-
+    <section id="pricing" class="py-16 sm:py-24 px-4 relative overflow-hidden">
         <div class="max-w-7xl mx-auto relative">
-            <!-- Header with Animated Line -->
-            <div class="text-center mb-20 relative pricing-card-hidden">
+            <!-- Header -->
+            <div class="text-center mb-12 sm:mb-20 relative pricing-card-hidden px-4 sm:px-6 lg:px-0">
                 <div class="inline-block">
-                    <span class="text-primary font-semibold mb-4 block tracking-wider">PRICING PLANS</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 relative">
+                    <span class="text-primary font-semibold mb-2 sm:mb-4 block tracking-wider text-sm sm:text-base">PRICING PLANS</span>
+                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 relative">
                         Simple, Transparent Pricing
                         <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full gradient-line-hidden"></div>
                     </h2>
                 </div>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-8">Choose the perfect plan for your TikTok automation needs.</p>
-                
-                <!-- Billing Toggle -->
-                <div class="flex items-center justify-center gap-4 mt-8">
-                    <span class="text-gray-600 font-medium">Monthly</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="billing-toggle" class="sr-only peer">
-                        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
-                    </label>
-                    <span class="text-gray-600 font-medium">Annually <span class="text-primary text-sm font-bold">Save 20%</span></span>
-                </div>
+                <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto mt-4 sm:mt-8">Choose the perfect plan for your TikTok automation needs.</p>
             </div>
 
-            <!-- Enhanced Pricing Grid -->
-            <div class="grid lg:grid-cols-3 gap-8 relative">
-                <!-- Starter Plan -->
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 px-4 sm:px-6 lg:px-0">
+                <!-- Pricing Cards -->
                 <div class="group relative pricing-card-hidden">
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                            <span class="text-gray-600 font-semibold">Starter</span>
-                        </div>
-                        
-                        <!-- Price -->
-                        <div class="text-center mb-8">
+                    <div class="relative bg-white rounded-3xl p-6 sm:p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
+                        <!-- Card Content -->
+                        <div class="text-center mb-6 sm:mb-8">
                             <div class="flex items-center justify-center gap-2">
-                                <span class="text-6xl font-bold">$29</span>
+                                <span class="text-3xl sm:text-6xl font-bold">$29</span>
                                 <div class="text-left">
-                                    <span class="text-gray-400">/mo</span>
-                                    <p class="text-sm text-gray-400">billed monthly</p>
+                                    <span class="text-xs sm:text-sm text-gray-400">/mo</span>
+                                    <p class="text-xs text-gray-400">billed monthly</p>
                                 </div>
                             </div>
-                            <p class="text-sm text-gray-500 mt-2">Perfect for creators just starting out</p>
                         </div>
-
                         <!-- Features List -->
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 pricing-feature-hidden" style="transition-delay: 0.1s">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                        <ul class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                            <li class="flex items-center gap-3 text-sm sm:text-base">
+                                <span class="flex-shrink-0 w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-primary/10 flex items-center justify-center">
                                     <i class="fas fa-check text-primary text-xs"></i>
                                 </span>
-                                <span class="text-gray-600">1 Account</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">100 Comments/Day</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Basic Analytics Dashboard</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Email Support</span>
+                                <span class="text-gray-600">Feature item</span>
                             </li>
                         </ul>
-
-                        <!-- CTA Button -->
-                        <a href="{% url 'main:register' %}" class="block text-center bg-gray-100 hover:bg-gray-200 px-6 py-4 rounded-full font-semibold transition-all pricing-cta-hidden">
-                            Start Free Trial
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Professional Plan -->
-                <div class="group relative lg:-translate-y-8 pricing-card-hidden pricing-popular" style="transition-delay: 0.2s">
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border-2 border-primary">
-                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary px-6 py-2 rounded-full">
-                            <span class="text-white font-semibold">Most Popular</span>
-                        </div>
-
-                        <!-- Price -->
-                        <div class="text-center mb-8">
-                            <div class="flex items-center justify-center gap-2">
-                                <span class="text-6xl font-bold">$79</span>
-                                <div class="text-left">
-                                    <span class="text-gray-400">/mo</span>
-                                    <p class="text-sm text-gray-400">billed monthly</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-500 mt-2">For growing creators and small teams</p>
-                        </div>
-
-                        <!-- Features List -->
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>5 Accounts</strong></span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>500 Comments/Day</strong></span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Advanced Analytics + Reports</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Priority Support</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Custom Comment Templates</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">API Access</span>
-                            </li>
-                        </ul>
-
-                        <!-- CTA Button -->
-                        <a href="{% url 'main:register' %}" class="block text-center bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded-full font-semibold transition-all pricing-cta-hidden relative overflow-hidden pricing-popular">
-                            <span class="relative z-10">Get Started Now</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 pricing-cta-visible"></div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Enterprise Plan -->
-                <div class="group relative pricing-card-hidden" style="transition-delay: 0.4s">
-                    <div class="relative bg-white rounded-3xl p-8 hover:translate-y-[-10px] transition-all duration-500 card-shadow border border-gray-100">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-2 bg-white rounded-full border border-gray-100 shadow-sm">
-                            <span class="text-gray-600 font-semibold">Enterprise</span>
-                        </div>
-
-                        <!-- Price -->
-                        <div class="text-center mb-8">
-                            <div class="flex items-center justify-center gap-2">
-                                <span class="text-6xl font-bold">$199</span>
-                                <div class="text-left">
-                                    <span class="text-gray-400">/mo</span>
-                                    <p class="text-sm text-gray-400">billed monthly</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-500 mt-2">For large teams and agencies</p>
-                        </div>
-
-                        <!-- Features List -->
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>Unlimited</strong> Accounts</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600"><strong>Unlimited</strong> Comments</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Custom Analytics Dashboard</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">24/7 Priority Support</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Dedicated Account Manager</span>
-                            </li>
-                            <li class="flex items-center gap-3 pricing-feature-hidden">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <i class="fas fa-check text-primary text-xs"></i>
-                                </span>
-                                <span class="text-gray-600">Custom Integration Support</span>
-                            </li>
-                        </ul>
-
-                        <!-- CTA Button -->
-                        <a href="{% url 'main:register' %}" class="block text-center bg-gray-100 hover:bg-gray-200 px-6 py-4 rounded-full font-semibold transition-all pricing-cta-hidden">
-                            Contact Sales
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Features with enhanced animations -->
-            <div class="mt-20 text-center">
-                <h3 class="text-2xl font-bold mb-8 pricing-card-hidden">All Plans Include</h3>
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden" style="transition-delay: 0.1s">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-shield-alt text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Secure Access</h4>
-                        <p class="text-sm text-gray-600">Bank-level security for your accounts</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-sync text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Regular Updates</h4>
-                        <p class="text-sm text-gray-600">Always up to date with TikTok changes</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-graduation-cap text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Onboarding</h4>
-                        <p class="text-sm text-gray-600">Guided setup and training included</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white transition-all duration-300 pricing-feature-hidden">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-life-ring text-primary text-xl"></i>
-                        </div>
-                        <h4 class="font-semibold mb-2">Support</h4>
-                        <p class="text-sm text-gray-600">Help when you need it</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Section -->
-            <div class="mt-20">
-                <h3 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h3>
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="p-6 rounded-2xl bg-white hover:shadow-lg transition-all duration-300">
-                        <h4 class="font-semibold mb-2">Can I change plans later?</h4>
-                        <p class="text-gray-600">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
-                    </div>
-                    <div class="p-6 rounded-2xl bg-white hover:shadow-lg transition-all duration-300">
-                        <h4 class="font-semibold mb-2">Is there a free trial?</h4>
-                        <p class="text-gray-600">Yes! Try any plan free for 14 days. No credit card required.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Enhanced CTA Section -->
-    <section class="py-24 px-4 relative overflow-hidden">
-        <!-- Dynamic Background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] cta-hidden"></div>
-        <div class="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] cta-hidden"></div>
-        
-        <!-- Floating Particles -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="particle" style="--particle-speed: 15s; animation: particleFloat var(--particle-speed) infinite;"></div>
-            <div class="particle" style="--particle-speed: 25s; animation: particleFloat var(--particle-speed) infinite; animation-delay: 5s;"></div>
-            <div class="particle" style="--particle-speed: 20s; animation: particleFloat var(--particle-speed) infinite; animation-delay: 2s;"></div>
-            <div class="particle" style="--particle-speed: 18s; animation: particleFloat var(--particle-speed) infinite; animation-delay: 8s;"></div>
-        </div>
-
-        <!-- Main Content Container -->
+    <!-- CTA Section -->
+    <section class="py-16 sm:py-24 px-4 relative overflow-hidden">
         <div class="max-w-4xl mx-auto relative">
-            <!-- Decorative Elements -->
-            <div class="absolute -top-10 -left-10 w-20 h-20 bg-primary/20 rounded-full blur-xl cta-hidden"></div>
-            <div class="absolute -bottom-10 -right-10 w-20 h-20 bg-secondary/20 rounded-full blur-xl cta-hidden"></div>
-            
-            <!-- Content Wrapper -->
-            <div class="relative bg-white/30 backdrop-blur-lg rounded-3xl p-12 border border-white/20 shadow-2xl cta-hidden">
+            <div class="relative bg-white/30 backdrop-blur-lg rounded-3xl p-6 sm:p-12 border border-white/20 shadow-2xl">
                 <div class="text-center relative">
-                    <!-- Premium Header -->
-                    <div class="inline-block relative mb-8 cta-hidden">
-                        <span class="text-primary font-semibold tracking-wider">TAKE THE NEXT STEP</span>
-                        <h2 class="text-4xl md:text-5xl font-bold mt-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <div class="inline-block relative mb-6 sm:mb-8">
+                        <span class="text-primary font-semibold tracking-wider text-sm sm:text-base">TAKE THE NEXT STEP</span>
+                        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold mt-2 sm:mt-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                             Ready to Automate Your TikTok Growth?
                         </h2>
-                        <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full gradient-line-hidden"></div>
-                    </div>
-
-                    <!-- Enhanced Description -->
-                    <div class="relative mb-12 cta-hidden">
-                        <p class="text-xl text-gray-600">Join thousands of content creators who trust AutoTok for their engagement automation.</p>
-                        <!-- Stats Display -->
-                        <div class="grid grid-cols-3 gap-8 mt-8">
-                            <div class="text-center">
-                                <div class="text-3xl font-bold gradient-text">10K+</div>
-                                <div class="text-sm text-gray-600">Active Users</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold gradient-text">1M+</div>
-                                <div class="text-sm text-gray-600">Comments Made</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold gradient-text">98%</div>
-                                <div class="text-sm text-gray-600">Satisfaction Rate</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Premium CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center cta-hidden">
-                        <a href="{% url 'main:register' %}" class="group relative glow-effect">
-                            <div class="relative bg-primary hover:bg-primary/90 text-white px-10 py-5 rounded-full text-lg font-semibold transition-all transform hover:scale-105">
-                                Start Free Trial
-                                <div class="absolute inset-0 rounded-full bg-white/20 blur-sm group-hover:blur-md transition-all"></div>
-                            </div>
-                        </a>
-                        <a href="{% url 'main:register' %}" class="relative overflow-hidden bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-primary/30 px-10 py-5 rounded-full text-lg font-semibold transition-all transform hover:scale-105 group">
-                            <span class="relative z-10 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent group-hover:opacity-80">Schedule Demo</span>
-                            <div class="absolute inset-0 rounded-full bg-white/20 blur-sm group-hover:blur-md transition-all"></div>
-                        </a>
-                    </div>
-
-                    <!-- Trust Indicators -->
-                    <div class="mt-12 pt-8 border-t border-gray-200/30 cta-hidden">
-                        <div class="flex flex-wrap justify-center items-center gap-8">
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-shield-alt text-primary"></i>
-                                <span class="text-sm text-gray-600">Bank-Level Security</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-clock text-primary"></i>
-                                <span class="text-sm text-gray-600">24/7 Support</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-undo text-primary"></i>
-                                <span class="text-sm text-gray-600">14-Day Money Back</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

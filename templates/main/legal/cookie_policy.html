@@ -1,0 +1,135 @@
+{% extends 'main/legal/base_legal.html' %}
+
+{% block title %}Cookie Policy - AutoTok{% endblock %}
+
+{% block header %}Cookie Policy{% endblock %}
+
+{% block header_description %}
+    Understanding how and why we use cookies on our website
+{% endblock %}
+
+{% block content %}
+    <div class="space-y-8">
+        <section>
+            <h2 class="text-2xl font-bold mb-4">What Are Cookies?</h2>
+            <p class="mb-4">Cookies are small text files that are placed on your computer or mobile device when you visit our website. They are widely used to make websites work more efficiently and provide useful information to website owners.</p>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">How We Use Cookies</h2>
+            <div class="space-y-4">
+                <p>We use cookies for the following purposes:</p>
+                <div class="grid gap-6">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-3">Essential Cookies</h3>
+                        <p class="text-gray-600">These cookies are necessary for the website to function properly. They enable core functionality such as security, network management, and accessibility. You may disable these by changing your browser settings, but this may affect how the website functions.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-3">Analytics Cookies</h3>
+                        <p class="text-gray-600">We use analytics cookies to understand how visitors interact with our website, helping us improve our website's functionality and user experience. These cookies collect information anonymously.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-3">Functionality Cookies</h3>
+                        <p class="text-gray-600">These cookies allow the website to remember choices you make (such as your username, language, or region) and provide enhanced features. They may also be used to provide services you have requested.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-3">Marketing Cookies</h3>
+                        <p class="text-gray-600">These cookies track your online activity to help advertisers deliver more relevant advertising or to limit how many times you see an ad. These cookies can share information with other organizations or advertisers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Specific Cookies We Use</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cookie Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purpose</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">sessionid</td>
+                            <td class="px-6 py-4">Maintains your session across page requests</td>
+                            <td class="px-6 py-4">Session</td>
+                            <td class="px-6 py-4">Essential</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">csrftoken</td>
+                            <td class="px-6 py-4">Prevents Cross-Site Request Forgery attacks</td>
+                            <td class="px-6 py-4">1 year</td>
+                            <td class="px-6 py-4">Essential</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">_ga</td>
+                            <td class="px-6 py-4">Google Analytics tracking</td>
+                            <td class="px-6 py-4">2 years</td>
+                            <td class="px-6 py-4">Analytics</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">user_preferences</td>
+                            <td class="px-6 py-4">Stores user preferences</td>
+                            <td class="px-6 py-4">6 months</td>
+                            <td class="px-6 py-4">Functionality</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Managing Cookies</h2>
+            <div class="space-y-4">
+                <p>Most web browsers allow you to manage cookies through their settings preferences. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience.</p>
+                
+                <h3 class="text-xl font-semibold">How to Control Cookies</h3>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-semibold mb-2">Chrome</h4>
+                        <ol class="list-decimal pl-4 space-y-1 text-sm">
+                            <li>Click the menu icon</li>
+                            <li>Select "Settings"</li>
+                            <li>Click "Privacy and security"</li>
+                            <li>Choose "Cookies and other site data"</li>
+                        </ol>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-semibold mb-2">Firefox</h4>
+                        <ol class="list-decimal pl-4 space-y-1 text-sm">
+                            <li>Click the menu icon</li>
+                            <li>Select "Options"</li>
+                            <li>Click "Privacy & Security"</li>
+                            <li>Choose your Cookie settings</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Updates to This Policy</h2>
+            <p>We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last Updated" date.</p>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+            <p>If you have any questions about our Cookie Policy, please contact us at:</p>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Email: privacy@autotok.com</li>
+                <li>Address: 123 Tech Street, San Francisco, CA 94105</li>
+            </ul>
+        </section>
+
+        <div class="text-sm text-gray-600 mt-12 pt-6 border-t">
+            <p>Last Updated: January 1, 2024</p>
+        </div>
+    </div>
+{% endblock %} 

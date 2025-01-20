@@ -220,3 +220,12 @@ def delete_account(request):
             messages.error(request, f'Error deleting account: {str(e)}')
             return redirect('main:dashboard')
     return redirect('main:dashboard')
+
+def privacy_policy(request):
+    return render(request, 'main/legal/privacy_policy.html')
+
+def terms_of_service(request):
+    return render(request, 'main/legal/terms_of_service.html')
+
+def cookie_policy(request):
+    return render(request, 'main/legal/cookie_policy.html')

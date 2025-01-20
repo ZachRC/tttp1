@@ -16,4 +16,9 @@ urlpatterns = [
     path('account/delete/', views.delete_account, name='delete-account'),
     path('api/auth/login/', views.api_login, name='api-login'),
     path('profile/update/', views.update_profile, name='update-profile'),
+    
+    # Legal Pages
+    path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
+    path('terms-of-service/', views.terms_of_service, name='terms-of-service'),
+    path('cookie-policy/', views.cookie_policy, name='cookie-policy'),
 ] 

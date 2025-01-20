@@ -238,3 +238,6 @@ def blog(request):
 
 def careers(request):
     return render(request, 'main/careers.html')
+
+def documentation(request):
+    return render(request, 'main/documentation.html')

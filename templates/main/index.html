@@ -859,7 +859,7 @@
                                 }
                             }
 
-                            // Video event listeners
+                            // Event Listeners
                             video.addEventListener('loadstart', showLoading);
                             video.addEventListener('canplay', () => {
                                 hideLoading();
@@ -899,7 +899,7 @@
                                 }
                             }
 
-                            // Intersection Observer for play/pause
+                            // Intersection Observer
                             const videoObserver = new IntersectionObserver((entries) => {
                                 entries.forEach(entry => {
                                     if (entry.isIntersecting && !isPlaying) {
@@ -930,7 +930,7 @@
                             }
                         }
 
-                        // Initialize video when DOM is ready
+                        // Initialize when DOM is ready
                         if (document.readyState === 'loading') {
                             document.addEventListener('DOMContentLoaded', initializeVideo);
                         } else {
@@ -944,19 +944,19 @@
                             <div class="absolute inset-0 rounded-3xl bg-white"></div>
                         </div>
                         <div class="relative aspect-video rounded-3xl overflow-hidden">
-                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-white/90 p-8">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 p-8">
                                 <div class="text-center max-w-lg">
-                                    <i class="fas fa-video text-5xl text-primary mb-6"></i>
+                                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                                        <i class="fas fa-video text-primary text-2xl"></i>
+                                    </div>
                                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Video Coming Soon!</h3>
-                                    <p class="text-gray-600 mb-6">We're working on creating an amazing demonstration video to show you how AutoTok works. Check back soon!</p>
-                                    <div class="flex justify-center gap-4">
-                                        <a href="#features" class="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors">
-                                            <i class="fas fa-list-ul mr-2"></i>
-                                            View Features
+                                    <p class="text-gray-600 mb-8">We're preparing an amazing video to showcase AutoTok's powerful features. In the meantime, explore our platform and discover how we can help you grow your TikTok presence.</p>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                        <a href="#features" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-all duration-300">
+                                            <i class="fas fa-star mr-2"></i>View Features
                                         </a>
-                                        <a href="{% url 'main:register' %}" class="inline-flex items-center px-6 py-3 rounded-full bg-secondary text-white hover:bg-secondary/90 transition-colors">
-                                            <i class="fas fa-user-plus mr-2"></i>
-                                            Get Started
+                                        <a href="{% url 'main:register' %}" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-lg transition-all duration-300">
+                                            <i class="fas fa-rocket mr-2"></i>Get Started
                                         </a>
                                     </div>
                                 </div>

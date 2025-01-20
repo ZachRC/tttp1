@@ -118,9 +118,16 @@ docker system prune -f
 log "Pulling latest changes from repository..."
 git pull origin main
 
-# Create necessary directories
+# Create necessary directories with proper permissions
 log "Creating necessary directories..."
 mkdir -p static media staticfiles
+chmod -R 755 static media staticfiles
+
+# Ensure media directory exists and has proper permissions
+log "Setting up media directory..."
+mkdir -p media/videos
+chmod -R 755 media
+chown -R $USER:$USER media
 
 # Build and start containers
 log "Building and starting containers..."
@@ -155,6 +162,13 @@ handle_migrations
 # Collect static files
 log "Collecting static files..."
 docker-compose exec -T web python manage.py collectstatic --noinput
+
+# Set proper permissions for media files
+log "Setting proper permissions for media files..."
+docker-compose exec -T web bash -c "
+    chown -R root:root /app/media
+    chmod -R 755 /app/media
+"
 
 # Restart Nginx
 log "Restarting Nginx..."

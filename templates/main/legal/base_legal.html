@@ -133,37 +133,13 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-100 py-8">
         <div class="container max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-12 mb-8">
-                <div>
-                    <span class="text-3xl font-bold gradient-text">AutoTok</span>
-                    <p class="mt-6 text-gray-600 leading-relaxed">Automating TikTok engagement for creators worldwide. Grow your presence effortlessly.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Product</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="{% url 'main:index' %}#features" class="hover:text-primary transition-colors">Features</a></li>
-                        <li><a href="{% url 'main:index' %}#pricing" class="hover:text-primary transition-colors">Pricing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Company</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="{% url 'main:about' %}" class="hover:text-primary transition-colors">About</a></li>
-                        <li><a href="{% url 'main:blog' %}" class="hover:text-primary transition-colors">Blog</a></li>
-                        <li><a href="{% url 'main:careers' %}" class="hover:text-primary transition-colors">Careers</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Legal</h4>
-                    <ul class="space-y-4 text-gray-600">
-                        <li><a href="{% url 'main:privacy-policy' %}" class="hover:text-primary transition-colors">Privacy Policy</a></li>
-                        <li><a href="{% url 'main:terms-of-service' %}" class="hover:text-primary transition-colors">Terms of Service</a></li>
-                        <li><a href="{% url 'main:cookie-policy' %}" class="hover:text-primary transition-colors">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center text-gray-600 pt-8 border-t border-gray-100">
+            <div class="text-center text-gray-600">
                 <p>&copy; {% now "Y" %} AutoTok. All rights reserved.</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="{% url 'main:privacy-policy' %}" class="hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="{% url 'main:terms-of-service' %}" class="hover:text-primary transition-colors">Terms of Service</a>
+                    <a href="{% url 'main:cookie-policy' %}" class="hover:text-primary transition-colors">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </footer>

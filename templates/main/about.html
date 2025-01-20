@@ -1,0 +1,85 @@
+{% extends 'main/legal/base_legal.html' %}
+
+{% block title %}About - AutoTok{% endblock %}
+
+{% block header %}About AutoTok{% endblock %}
+
+{% block header_description %}Learn about our mission to revolutionize TikTok engagement through intelligent automation.{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Mission Section -->
+    <div>
+        <h2 class="text-2xl font-bold mb-4 gradient-text">Our Mission</h2>
+        <p class="text-gray-600 leading-relaxed">
+            At AutoTok, we're on a mission to empower TikTok creators with intelligent automation tools that enhance engagement, save time, and drive growth. We believe that every creator deserves the opportunity to reach their full potential without being bogged down by manual engagement tasks.
+        </p>
+    </div>
+
+    <!-- Story Section -->
+    <div>
+        <h2 class="text-2xl font-bold mb-4 gradient-text">Our Story</h2>
+        <p class="text-gray-600 leading-relaxed">
+            Founded by a team of social media experts and AI enthusiasts, AutoTok was born from the realization that creators spend too much time on manual engagement instead of focusing on what they do best - creating amazing content. We set out to build a platform that would automate these tasks intelligently while maintaining authentic connections with audiences.
+        </p>
+    </div>
+
+    <!-- Values Section -->
+    <div>
+        <h2 class="text-2xl font-bold mb-4 gradient-text">Our Values</h2>
+        <div class="grid sm:grid-cols-2 gap-6 mt-4">
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-gray-100">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-star text-primary"></i>
+                    </div>
+                    <h3 class="font-semibold">Innovation</h3>
+                </div>
+                <p class="text-gray-600">Constantly pushing boundaries to deliver cutting-edge automation solutions.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-gray-100">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-primary"></i>
+                    </div>
+                    <h3 class="font-semibold">Trust</h3>
+                </div>
+                <p class="text-gray-600">Building reliable, secure solutions that creators can depend on.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-gray-100">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-users text-primary"></i>
+                    </div>
+                    <h3 class="font-semibold">Community</h3>
+                </div>
+                <p class="text-gray-600">Fostering a supportive environment for creators to grow together.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-gray-100">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-rocket text-primary"></i>
+                    </div>
+                    <h3 class="font-semibold">Growth</h3>
+                </div>
+                <p class="text-gray-600">Empowering creators to achieve their full potential on TikTok.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div>
+        <h2 class="text-2xl font-bold mb-4 gradient-text">Our Team</h2>
+        <p class="text-gray-600 leading-relaxed mb-6">
+            We're a diverse team of social media experts, developers, and AI specialists working together to revolutionize TikTok automation. Our combined experience in social media growth and artificial intelligence allows us to create solutions that truly understand and address the needs of content creators.
+        </p>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4">Join Us on Our Mission</h2>
+        <p class="text-gray-600 mb-6">Ready to revolutionize your TikTok presence? Start your journey with AutoTok today.</p>
+        <a href="{% url 'main:register' %}" class="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">Get Started</a>
+    </div>
+</div>
+{% endblock %} 

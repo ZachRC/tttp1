@@ -21,8 +21,6 @@ urlpatterns = [
     path('privacy-policy/', views.privacy_policy, name='privacy-policy'),
     path('terms-of-service/', views.terms_of_service, name='terms-of-service'),
     path('cookie-policy/', views.cookie_policy, name='cookie-policy'),
-
-    # Company Pages
     path('about/', views.about, name='about'),
     path('blog/', views.blog, name='blog'),
     path('careers/', views.careers, name='careers'),

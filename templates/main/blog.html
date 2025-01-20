@@ -1,0 +1,111 @@
+{% extends 'main/legal/base_legal.html' %}
+
+{% block title %}Blog - AutoTok{% endblock %}
+
+{% block header %}AutoTok Blog{% endblock %}
+
+{% block header_description %}Stay updated with the latest TikTok trends, automation tips, and success stories from our community.{% endblock %}
+
+{% block content %}
+<div class="space-y-12">
+    <!-- Featured Post -->
+    <div class="relative group">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-all"></div>
+        <div class="relative bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl p-8 border border-gray-100">
+            <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">Featured</span>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Maximizing TikTok Engagement: The Power of Smart Automation</h2>
+            <p class="text-gray-600 mb-6 line-clamp-3">
+                Discover how intelligent automation can transform your TikTok strategy while maintaining authentic connections with your audience. Learn the best practices for using AutoTok to boost your engagement rates and grow your following organically.
+            </p>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=FF0050&color=fff" alt="Sarah Johnson" class="w-10 h-10 rounded-full">
+                    <div>
+                        <p class="font-medium">Sarah Johnson</p>
+                        <p class="text-sm text-gray-500">Growth Specialist</p>
+                    </div>
+                </div>
+                <span class="text-sm text-gray-500">5 min read</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Posts Grid -->
+    <div>
+        <h2 class="text-2xl font-bold mb-6">Recent Posts</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+            <!-- Post 1 -->
+            <div class="group">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-all">
+                    <span class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-4">Tips & Tricks</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">10 Ways to Optimize Your TikTok Comments</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2">
+                        Learn how to craft engaging comments that drive meaningful interactions and grow your following organically.
+                    </p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Mar 15, 2024</span>
+                        <span class="text-gray-500">3 min read</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="group">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-all">
+                    <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">Case Study</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">How Creator Jane Doubled Her Engagement</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2">
+                        A detailed look at how lifestyle creator Jane used AutoTok to dramatically increase her engagement rates.
+                    </p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Mar 12, 2024</span>
+                        <span class="text-gray-500">4 min read</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="group">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-all">
+                    <span class="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">Industry News</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">TikTok's Latest Algorithm Update</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2">
+                        Understanding the recent changes to TikTok's algorithm and how they affect content creators.
+                    </p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Mar 10, 2024</span>
+                        <span class="text-gray-500">5 min read</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 4 -->
+            <div class="group">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-all">
+                    <span class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-4">Tutorial</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Getting Started with AutoTok</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2">
+                        A comprehensive guide to setting up and optimizing your AutoTok account for maximum results.
+                    </p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Mar 8, 2024</span>
+                        <span class="text-gray-500">6 min read</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4">Stay Updated</h2>
+        <p class="text-gray-600 mb-6">Subscribe to our newsletter for the latest TikTok insights and automation tips.</p>
+        <form class="max-w-md mx-auto flex gap-4">
+            <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary">
+            <button type="submit" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all whitespace-nowrap">
+                Subscribe
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %} 

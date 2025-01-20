@@ -231,10 +231,10 @@ def cookie_policy(request):
     return render(request, 'main/legal/cookie_policy.html')
 
 def about(request):
-    return render(request, 'main/company/about.html')
+    return render(request, 'main/about.html')
 
 def blog(request):
-    return render(request, 'main/company/blog.html')
+    return render(request, 'main/blog.html')
 
 def careers(request):
-    return render(request, 'main/company/careers.html')
+    return render(request, 'main/careers.html')

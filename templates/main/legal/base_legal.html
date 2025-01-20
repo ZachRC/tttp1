@@ -42,9 +42,66 @@
     <nav class="sticky top-0 left-0 right-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="container max-w-7xl mx-auto px-4">
             <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo -->
                 <a href="{% url 'main:index' %}" class="flex items-center">
                     <span class="text-xl sm:text-2xl lg:text-3xl font-bold gradient-text">AutoTok</span>
                 </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="{% url 'main:index' %}#features" class="hover:text-primary px-3 py-2 text-sm font-medium">Features</a>
+                    <a href="{% url 'main:index' %}#how-it-works" class="hover:text-primary px-3 py-2 text-sm font-medium">How It Works</a>
+                    <a href="{% url 'main:index' %}#pricing" class="hover:text-primary px-3 py-2 text-sm font-medium">Pricing</a>
+                    <a href="{% url 'main:register' %}" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full text-sm font-medium transition-all">Get Started</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-50">
+            <div class="absolute inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300"></div>
+            <div class="absolute top-0 left-0 w-full max-h-screen bg-white transform transition-transform duration-300 ease-out shadow-xl">
+                <div class="container-fluid max-w-7xl mx-auto">
+                    <!-- Menu Header -->
+                    <div class="flex items-center justify-between p-4">
+                        <span class="text-xl font-bold gradient-text">AutoTok</span>
+                        <button id="mobile-menu-close" class="p-2 text-gray-500 hover:text-primary">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Menu Links -->
+                    <div class="px-4 pt-2 pb-6">
+                        <nav class="space-y-1">
+                            <a href="{% url 'main:index' %}#features" class="mobile-menu-link flex items-center space-x-4 px-4 py-3 text-base font-medium text-gray-600 hover:text-primary rounded-xl hover:bg-primary/5 transition-all">
+                                <i class="fas fa-star-half-alt w-5 text-primary"></i>
+                                <span>Features</span>
+                            </a>
+                            <a href="{% url 'main:index' %}#how-it-works" class="mobile-menu-link flex items-center space-x-4 px-4 py-3 text-base font-medium text-gray-600 hover:text-primary rounded-xl hover:bg-primary/5 transition-all">
+                                <i class="fas fa-magic w-5 text-primary"></i>
+                                <span>How It Works</span>
+                            </a>
+                            <a href="{% url 'main:index' %}#pricing" class="mobile-menu-link flex items-center space-x-4 px-4 py-3 text-base font-medium text-gray-600 hover:text-primary rounded-xl hover:bg-primary/5 transition-all">
+                                <i class="fas fa-tag w-5 text-primary"></i>
+                                <span>Pricing</span>
+                            </a>
+                        </nav>
+                        
+                        <!-- Call to Action -->
+                        <div class="mt-6 px-4">
+                            <a href="{% url 'main:register' %}" class="block w-full bg-gradient-to-r from-primary to-secondary text-white text-center px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -86,5 +143,62 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuPanel = mobileMenu.querySelector('.transform');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const body = document.body;
+            
+            function toggleMenu(show) {
+                if (show) {
+                    // Show menu
+                    mobileMenu.classList.remove('hidden');
+                    setTimeout(() => {
+                        mobileMenuPanel.classList.add('translate-y-0');
+                        mobileMenuPanel.classList.remove('-translate-y-full');
+                    }, 10);
+                    body.style.overflow = 'hidden';
+                } else {
+                    // Hide menu
+                    mobileMenuPanel.classList.remove('translate-y-0');
+                    mobileMenuPanel.classList.add('-translate-y-full');
+                    
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                    body.style.overflow = '';
+                }
+            }
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    toggleMenu(isHidden);
+                });
+
+                mobileMenuClose.addEventListener('click', () => {
+                    toggleMenu(false);
+                });
+
+                // Close menu when clicking outside
+                mobileMenu.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('backdrop-blur-sm')) {
+                        toggleMenu(false);
+                    }
+                });
+
+                // Close menu when clicking links
+                document.querySelectorAll('.mobile-menu-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleMenu(false);
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html> 

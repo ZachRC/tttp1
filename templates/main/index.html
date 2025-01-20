@@ -792,7 +792,9 @@
                                 playsinline
                                 loop
                             >
-                                <source src="{{ video.video.url }}" type="video/mp4" onerror="this.parentElement.dispatchEvent(new Event('error'))">
+                                {% if video and video.video %}
+                                    <source src="{{ video.video.url|safe }}" type="video/mp4">
+                                {% endif %}
                                 Your browser does not support the video tag.
                             </video>
                             
@@ -806,7 +808,7 @@
                                 <div class="text-center">
                                     <i class="fas fa-exclamation-circle text-4xl text-primary mb-4"></i>
                                     <p class="text-gray-600">Unable to load video</p>
-                                    <button onclick="retryVideo()" class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                    <button onclick="window.retryVideo && window.retryVideo()" class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
                                         Retry
                                     </button>
                                 </div>
@@ -824,6 +826,8 @@
                             if (!video || !loadingState || !errorState) return;
 
                             let isPlaying = false;
+                            let retryCount = 0;
+                            const MAX_RETRIES = 3;
                             
                             function showLoading() {
                                 loadingState.style.display = 'flex';
@@ -846,20 +850,31 @@
                                 errorState.classList.add('hidden');
                             }
 
+                            function handleVideoError(error) {
+                                console.warn('Video error occurred:', error);
+                                if (retryCount < MAX_RETRIES) {
+                                    retryCount++;
+                                    console.log(`Retrying video load (attempt ${retryCount}/${MAX_RETRIES})`);
+                                    setTimeout(retryVideo, 1000);
+                                } else {
+                                    showError();
+                                }
+                            }
+
                             // Video event listeners
                             video.addEventListener('loadstart', showLoading);
                             video.addEventListener('canplay', () => {
                                 hideLoading();
                                 hideError();
+                                retryCount = 0; // Reset retry count on successful load
                                 if (!isPlaying && video.getBoundingClientRect().top < window.innerHeight) {
                                     playVideo();
                                 }
                             });
                             
-                            video.addEventListener('error', () => {
-                                console.warn('Video error occurred');
-                                showError();
-                            });
+                            video.addEventListener('error', (e) => handleVideoError(e));
+                            video.addEventListener('stalled', (e) => handleVideoError(e));
+                            video.addEventListener('abort', (e) => handleVideoError(e));
 
                             video.addEventListener('waiting', showLoading);
                             video.addEventListener('playing', () => {
@@ -880,7 +895,7 @@
                                                 // User interaction required, we'll try again when they scroll
                                                 return;
                                             }
-                                            showError();
+                                            handleVideoError(error);
                                         });
                                     }
                                 }
@@ -905,6 +920,9 @@
                             window.retryVideo = function() {
                                 hideError();
                                 showLoading();
+                                // Reset the source to force reload
+                                const currentSrc = video.querySelector('source').src;
+                                video.querySelector('source').src = currentSrc;
                                 video.load();
                             };
 

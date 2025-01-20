@@ -9,4 +9,3 @@ python-dotenv
 dj-database-url
 stripe
 django-csp
-ffmpeg-python

@@ -774,7 +774,7 @@
 
             <!-- Video Player Container -->
             <div class="relative max-w-4xl mx-auto px-4 sm:px-6">
-                {% if video %}
+                {% if video and video.video %}
                     <!-- Video Wrapper with Aspect Ratio -->
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white">
                         <!-- Gradient Border -->
@@ -787,12 +787,12 @@
                             <video 
                                 id="demoVideo"
                                 class="w-full h-full object-cover pointer-events-none"
-                                preload="auto"
+                                preload="metadata"
                                 muted
                                 playsinline
                                 loop
                             >
-                                <source src="{{ video.video.url }}" type="video/mp4">
+                                <source src="{{ video.video.url }}" type="video/mp4" onerror="this.parentElement.dispatchEvent(new Event('error'))">
                                 Your browser does not support the video tag.
                             </video>
                             
@@ -806,6 +806,9 @@
                                 <div class="text-center">
                                     <i class="fas fa-exclamation-circle text-4xl text-primary mb-4"></i>
                                     <p class="text-gray-600">Unable to load video</p>
+                                    <button onclick="retryVideo()" class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                        Retry
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -813,87 +816,110 @@
 
                     <!-- Video Controls Script -->
                     <script>
-                        document.addEventListener('DOMContentLoaded', function() {
+                        function initializeVideo() {
                             const video = document.getElementById('demoVideo');
                             const loadingState = document.getElementById('videoLoading');
                             const errorState = document.getElementById('videoError');
                             
-                            if (!video) return;
+                            if (!video || !loadingState || !errorState) return;
 
-                            // Loading state handling
+                            let isPlaying = false;
+                            
                             function showLoading() {
-                                if (loadingState) loadingState.style.opacity = '1';
+                                loadingState.style.display = 'flex';
+                                loadingState.style.opacity = '1';
                             }
                             
                             function hideLoading() {
-                                if (loadingState) {
-                                    loadingState.style.opacity = '0';
-                                    setTimeout(() => {
-                                        loadingState.style.display = 'none';
-                                    }, 300);
-                                }
+                                loadingState.style.opacity = '0';
+                                setTimeout(() => {
+                                    loadingState.style.display = 'none';
+                                }, 300);
                             }
                             
                             function showError() {
-                                if (errorState) errorState.classList.remove('hidden');
-                                if (loadingState) loadingState.style.display = 'none';
+                                errorState.classList.remove('hidden');
+                                loadingState.style.display = 'none';
+                            }
+                            
+                            function hideError() {
+                                errorState.classList.add('hidden');
                             }
 
                             // Video event listeners
                             video.addEventListener('loadstart', showLoading);
-                            video.addEventListener('canplay', hideLoading);
-                            video.addEventListener('error', showError);
+                            video.addEventListener('canplay', () => {
+                                hideLoading();
+                                hideError();
+                                if (!isPlaying && video.getBoundingClientRect().top < window.innerHeight) {
+                                    playVideo();
+                                }
+                            });
                             
-                            // Create an Intersection Observer for play/pause
-                            const videoObserver = new IntersectionObserver((entries) => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        // Only attempt to play if the video is ready
-                                        if (video.readyState >= 3) {
-                                            const playPromise = video.play();
-                                            if (playPromise !== undefined) {
-                                                playPromise.catch(error => {
-                                                    console.warn('Video play failed:', error);
-                                                });
-                                            }
-                                        }
-                                    } else {
-                                        video.pause();
-                                    }
-                                });
-                            }, {
-                                threshold: 0.5 // Trigger when 50% of the video is visible
+                            video.addEventListener('error', () => {
+                                console.warn('Video error occurred');
+                                showError();
                             });
 
-                            // Start observing the video
-                            videoObserver.observe(video);
-
-                            // Additional event listeners for better playback handling
                             video.addEventListener('waiting', showLoading);
-                            video.addEventListener('playing', hideLoading);
-                            video.addEventListener('stalled', () => {
-                                // If video stalls, try to recover
-                                if (video.paused) {
+                            video.addEventListener('playing', () => {
+                                hideLoading();
+                                isPlaying = true;
+                            });
+                            video.addEventListener('pause', () => {
+                                isPlaying = false;
+                            });
+                            
+                            function playVideo() {
+                                if (video.readyState >= 2) {
                                     const playPromise = video.play();
                                     if (playPromise !== undefined) {
-                                        playPromise.catch(() => {
-                                            // If recovery fails, show error
+                                        playPromise.catch(error => {
+                                            console.warn('Video play failed:', error);
+                                            if (error.name === 'NotAllowedError') {
+                                                // User interaction required, we'll try again when they scroll
+                                                return;
+                                            }
                                             showError();
                                         });
                                     }
                                 }
+                            }
+
+                            // Intersection Observer for play/pause
+                            const videoObserver = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting && !isPlaying) {
+                                        playVideo();
+                                    } else if (!entry.isIntersecting && isPlaying) {
+                                        video.pause();
+                                    }
+                                });
+                            }, {
+                                threshold: 0.5
                             });
 
-                            // Periodic check for video health
-                            setInterval(() => {
-                                if (video.paused && !video.ended && video.currentTime > 0) {
-                                    const playPromise = video.play();
-                                    if (playPromise !== undefined) {
-                                        playPromise.catch(() => {});
-                                    }
-                                }
-                            }, 5000);
-                        });
+                            videoObserver.observe(video);
+
+                            // Retry mechanism
+                            window.retryVideo = function() {
+                                hideError();
+                                showLoading();
+                                video.load();
+                            };
+
+                            // Initial load
+                            if (video.readyState === 0) {
+                                showLoading();
+                            }
+                        }
+
+                        // Initialize video when DOM is ready
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', initializeVideo);
+                        } else {
+                            initializeVideo();
+                        }
                     </script>
                 {% else %}
                     <div class="text-center text-gray-500 bg-white/50 backdrop-blur-sm p-12 rounded-3xl border border-gray-200">
